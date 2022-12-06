@@ -7,15 +7,15 @@ on:
 jobs:
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Cypress v9 and lower ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 
-  basic-ubuntu-18:
-    runs-on: ubuntu-18.04
+  basic-on-ubuntu:
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Cypress tests
         # normally you would write
-        # uses: cypress-io/github-action@v2
+        # uses: cypress-io/github-action@v5
         uses: ./
         # the parameters below are only necessary
         # because we are running these examples in a monorepo
@@ -26,23 +26,11 @@ jobs:
           # see https://on.cypress.io/command-line#cypress-info
           build: npx cypress info
 
-  basic-ubuntu-20:
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Cypress tests
-        uses: ./
-        with:
-          working-directory: examples/v9/basic
-          build: npx cypress info
-
   basic-on-windows:
     runs-on: windows-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Cypress tests
         uses: ./
@@ -54,7 +42,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Cypress tests
         uses: ./
@@ -66,10 +54,10 @@ jobs:
   # shows that the job should not fail
   # https://github.com/cypress-io/github-action/issues/327
   basic-without-binary-install:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Cypress tests
         uses: ./
@@ -84,15 +72,15 @@ jobs:
 
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Cypress v10 and higher ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 
-  basic-ubuntu-18-v10:
-    runs-on: ubuntu-18.04
+  basic-on-ubuntu-v10:
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Cypress tests
         # normally you would write
-        # uses: cypress-io/github-action@v2
+        # uses: cypress-io/github-action@v5
         uses: ./
         # the parameters below are only necessary
         # because we are running these examples in a monorepo
@@ -103,23 +91,11 @@ jobs:
           # see https://on.cypress.io/command-line#cypress-info
           build: npx cypress info
 
-  basic-ubuntu-20-v10:
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Cypress tests
-        uses: ./
-        with:
-          working-directory: examples/v10/basic
-          build: npx cypress info
-
   basic-on-windows-v10:
     runs-on: windows-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Cypress tests
         uses: ./
@@ -131,7 +107,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Cypress tests
         uses: ./
@@ -143,10 +119,10 @@ jobs:
   # shows that the job should not fail
   # https://github.com/cypress-io/github-action/issues/327
   basic-without-binary-install-v10:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Cypress tests
         uses: ./
