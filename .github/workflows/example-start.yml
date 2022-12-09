@@ -4,6 +4,11 @@ on:
     branches:
       - 'master'
   pull_request:
+  workflow_dispatch:
+
+env: 
+  NO_UPDATE_CHECK: true
+
 jobs:
 
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Cypress v9 and lower ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
