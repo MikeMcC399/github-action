@@ -29,7 +29,7 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: screenshots-in-firefox
-          path: examples/firefox/cypress/screenshots
+          path: examples/v9/firefox/cypress/screenshots
 
       - run: npx image-size cypress/screenshots/**/*.png
         working-directory: examples/v9/firefox
