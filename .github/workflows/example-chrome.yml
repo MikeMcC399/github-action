@@ -32,7 +32,7 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: screenshots-in-electron
-          path: examples/chrome/cypress/screenshots
+          path: examples/v9/chrome/cypress/screenshots
 
       - run: npx image-size cypress/screenshots/**/*.png
         working-directory: examples/v9/chrome
@@ -46,12 +46,12 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: screenshots-in-chrome
-          path: examples/chrome/cypress/screenshots
+          path: examples/v9/chrome/cypress/screenshots
 
       - uses: actions/upload-artifact@v3
         with:
           name: video-in-chrome
-          path: examples/chrome/cypress/videos
+          path: examples/v9/chrome/cypress/videos
 
       - run: npx image-size cypress/screenshots/**/*.png
         working-directory: examples/v9/chrome
@@ -71,12 +71,12 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: screenshots-in-headed-chrome
-          path: examples/chrome/cypress/screenshots
+          path: examples/v9/chrome/cypress/screenshots
 
       - uses: actions/upload-artifact@v3
         with:
           name: video-in-headed-chrome
-          path: examples/chrome/cypress/videos
+          path: examples/v9/chrome/cypress/videos
 
       - run: npx image-size cypress/screenshots/**/*.png
         working-directory: examples/v9/chrome
@@ -106,7 +106,7 @@ jobs:
       # store screenshot captured during the test
       - uses: actions/upload-artifact@v3
         with:
-          name: screenshots-in-electron
+          name: screenshots-in-electron-v10
           path: examples/v10/chrome/cypress/screenshots
 
       - run: npx image-size cypress/screenshots/**/*.png
@@ -120,12 +120,12 @@ jobs:
 
       - uses: actions/upload-artifact@v3
         with:
-          name: screenshots-in-chrome
+          name: screenshots-in-chrome-v10
           path: examples/v10/chrome/cypress/screenshots
 
       - uses: actions/upload-artifact@v3
         with:
-          name: video-in-chrome
+          name: video-in-chrome-v10
           path: examples/v10/chrome/cypress/videos
 
       - run: npx image-size cypress/screenshots/**/*.png
@@ -141,16 +141,16 @@ jobs:
         with:
           working-directory: examples/v10/chrome
           browser: chrome
-          headless: true
+          headed: false
 
       - uses: actions/upload-artifact@v3
         with:
-          name: screenshots-in-headless-chrome
+          name: screenshots-in-headless-chrome-v10
           path: examples/v10/chrome/cypress/screenshots
 
       - uses: actions/upload-artifact@v3
         with:
-          name: video-in-headless-chrome
+          name: video-in-headless-chrome-v10
           path: examples/v10/chrome/cypress/videos
 
       - run: npx image-size cypress/screenshots/**/*.png
