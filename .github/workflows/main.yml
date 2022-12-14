@@ -29,8 +29,8 @@ jobs:
     runs-on: ubuntu-20.04
     name: release
     needs: [build-and-test]
-    # only release from the master branch
-    if: github.ref == 'refs/heads/master'
+    # only release from a non-forked repository
+    if: github.repository == 'cypress-io/github-action'
     steps:
       - name: Checkout
         uses: actions/checkout@v3

@@ -16,6 +16,7 @@ on:
       - 'master'
   pull_request:
 jobs:
+
   # single job that generates and outputs a common id
   prepare:
     runs-on: ubuntu-20.04
@@ -35,6 +36,7 @@ jobs:
   # let's run small subset of the tests
   # and record it to the dashboard
   smoke-tests:
+    if: github.repository == 'cypress-io/github-action'
     needs: ['prepare']
     runs-on: ubuntu-20.04
     steps:
@@ -64,6 +66,7 @@ jobs:
   # tests should be under the same logical recorded run
   # under different groups
   all-tests:
+    if: github.repository == 'cypress-io/github-action'
     needs: ['prepare', 'smoke-tests']
     runs-on: ubuntu-20.04
     strategy:
