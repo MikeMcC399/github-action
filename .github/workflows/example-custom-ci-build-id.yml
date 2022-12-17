@@ -18,7 +18,8 @@ on:
 jobs:
   # single job that generates and outputs a common id
   prepare:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
+
     outputs:
       uuid: ${{ steps.uuid.outputs.value }}
     steps:
@@ -36,7 +37,8 @@ jobs:
   # and record it to the dashboard
   smoke-tests:
     needs: ['prepare']
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
+
     steps:
       - name: Checkout 🛎
         uses: actions/checkout@v3
@@ -65,7 +67,8 @@ jobs:
   # under different groups
   all-tests:
     needs: ['prepare', 'smoke-tests']
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
+
     strategy:
       fail-fast: false
       matrix:

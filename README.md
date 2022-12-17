@@ -49,7 +49,8 @@ name: End-to-end tests
 on: [push]
 jobs:
   cypress-run:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -94,7 +95,8 @@ name: E2E on Chrome
 on: [push]
 jobs:
   cypress-run:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
+
     # let's make sure our tests pass on Chrome browser
     name: E2E on Chrome
     steps:
@@ -115,7 +117,8 @@ name: Firefox
 on: push
 jobs:
   firefox:
-    runs-on: ubuntu-latest
+    runs-on: 22.04
+
     container:
       image: cypress/browsers:node12.16.1-chrome80-ff73
       options: --user 1001
@@ -158,7 +161,8 @@ name: Chrome headed
 on: [push]
 jobs:
   cypress-run:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
+
     steps:
       - uses: actions/checkout@v3
       - uses: cypress-io/github-action@v5
@@ -176,7 +180,8 @@ name: E2E in custom container
 on: [push]
 jobs:
   cypress-run:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
+
     # Cypress Docker image with Chrome v78
     # and Firefox v70 pre-installed
     container: cypress/browsers:node12.13.0-chrome78-ff70
@@ -196,7 +201,8 @@ name: Cypress tests
 on: [push]
 jobs:
   cypress-run:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -214,7 +220,8 @@ name: Cypress tests
 on: [push]
 jobs:
   cypress-run:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -240,7 +247,8 @@ on: [push]
 jobs:
   cypress-run:
     name: Cypress run
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -271,7 +279,8 @@ on: [push]
 jobs:
   cypress-run:
     name: Cypress run
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -291,7 +300,8 @@ on: [push]
 jobs:
   cypress-run:
     name: Cypress run
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -323,7 +333,8 @@ on: [push]
 jobs:
   cypress-run:
     name: Cypress run
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -350,7 +361,8 @@ name: example-quiet
 on: [push]
 jobs:
   cypress-run:
-    runs-on: ubuntu-latest
+    runs-on: 22.04
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -374,7 +386,8 @@ name: tags
 on: [push]
 jobs:
   cypress-run:
-    runs-on: ubuntu-latest
+    runs-on: 22.04
+
     # let's make sure our "app" works on several versions of Node
     strategy:
       matrix:
@@ -415,7 +428,8 @@ name: Artifacts
 on: [push]
 jobs:
   cypress-run:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
+
     name: Artifacts
     steps:
       - uses: actions/checkout@v3
@@ -449,7 +463,8 @@ on: [push]
 jobs:
   cypress-run:
     name: Cypress run
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -472,7 +487,8 @@ on: [push]
 jobs:
   cypress-run:
     name: Cypress run
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -497,7 +513,8 @@ on: [push]
 jobs:
   test:
     name: Cypress run
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
+
     strategy:
       # when one test fails, DO NOT cancel the other
       # containers, because this will kill Cypress processes
@@ -561,7 +578,8 @@ name: Build
 on: [push]
 jobs:
   cypress-run:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -580,7 +598,8 @@ name: With server
 on: [push]
 jobs:
   cypress-run:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -597,7 +616,8 @@ name: With server
 on: [push]
 jobs:
   cypress-run:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -653,7 +673,8 @@ name: After server responds
 on: [push]
 jobs:
   cypress-run:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -728,7 +749,8 @@ name: Visual
 on: [push]
 jobs:
   e2e:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -771,7 +793,8 @@ name: Parallel
 on: [push]
 jobs:
   test:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
+
     strategy:
       matrix:
         # run 3 copies of the current job in parallel
@@ -844,7 +867,8 @@ You can specify the `e2e` working directory when running Cypress tests using `wo
 on: [push]
 jobs:
   cypress-run:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
+
     steps:
       - uses: actions/checkout@v3
       - uses: cypress-io/github-action@v5
@@ -880,7 +904,8 @@ name: E2E
 on: push
 jobs:
   test:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
+
     steps:
       - uses: actions/checkout@master
       - name: Install root dependencies
@@ -910,7 +935,8 @@ jobs:
     # the example has Yarn workspace in its "root" folder
     # examples/start-and-yarn-workspaces
     # and tests in a subfolder like "workspace-1"
-    runs-on: ubuntu-latest
+    runs-on: 22.04
+
     steps:
       - uses: actions/checkout@v3
       - uses: cypress-io/github-action@v5
@@ -932,7 +958,8 @@ name: End-to-end tests
 on: [push]
 jobs:
   cypress-run:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
+
     # let's make sure our "app" works on several versions of Node
     strategy:
       matrix:
@@ -967,7 +994,8 @@ name: Node versions
 on: [push]
 jobs:
   cypress-run:
-    runs-on: ubuntu-latest
+    runs-on: 22.04
+
     strategy:
       matrix:
         node: [10, 12]
@@ -993,7 +1021,8 @@ name: E2E
 on: push
 jobs:
   test:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
+
     steps:
       - uses: actions/checkout@master
       - name: Install dependencies
@@ -1046,7 +1075,8 @@ You can tell the CI to stop the job or the individual step if it runs for longer
 ```yml
 jobs:
   cypress-run:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
+
     # stop the job if it runs over 10 minutes
     # to prevent a hanging process from using all your CI minutes
     timeout-minutes: 10
@@ -1191,7 +1221,8 @@ name: included
 on: [push]
 jobs:
   cypress-run:
-    runs-on: ubuntu-latest
+    runs-on: 22.04
+
     # Docker image with Cypress pre-installed
     # https://github.com/cypress-io/cypress-docker-images/tree/master/included
     container: cypress/included:3.8.3
@@ -1211,7 +1242,8 @@ name: info
 on: [push]
 jobs:
   cypress-run:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -1228,7 +1260,8 @@ name: info
 on: [push]
 jobs:
   cypress-run:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -1259,7 +1292,8 @@ on:
     - cron: '0 4 * * *'
 jobs:
   nightly:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
