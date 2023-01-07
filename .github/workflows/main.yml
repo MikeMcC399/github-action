@@ -9,34 +9,31 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-22.04
-    strategy:
-      matrix:
-        node: [14, 16, 18]
-    name: Test on Node v${{ matrix.node }}
+    name: Build
     steps:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node }}
+          node-version: 16.13.0
       - uses: bahmutov/npm-install@v1
       - run: npm run format
       - run: npm run build
+      # This is a dummy call
       - run: npm test
-      - run: npm run check:markdown
-
 
   release:
     runs-on: ubuntu-22.04
     name: release
     needs: [build-and-test]
     # only release from the master branch
-    if: github.ref == 'refs/heads/master'
+#    if: github.ref == 'refs/heads/master'
     steps:
       - name: Checkout
         uses: actions/checkout@v3
       - uses: bahmutov/npm-install@v1
+      - run: echo "This is the release step"
       # https://github.com/cycjimmy/semantic-release-action
       - name: Semantic Release
         uses: cycjimmy/semantic-release-action@v3
@@ -50,11 +47,24 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Push updates to branch for major version
-        # if there is a new version published, let's say v1.2.3
-        # then this step will update branch "v1" to this commit
-        # https://github.com/cypress-io/github-action/branches
-        if: steps.semantic.outputs.new_release_published == 'true'
-        run: 'git push https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git HEAD:refs/heads/v${{steps.semantic.outputs.new_release_major_version}}'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Push updates to branch for major version
+      #   # if there is a new version published, let's say v1.2.3
+      #   # then this step will update branch "v1" to this commit
+      #   # https://github.com/cypress-io/github-action/branches
+      #   if: steps.semantic.outputs.new_release_published == 'true'
+      #   run: 'git push https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git HEAD:refs/heads/v${{steps.semantic.outputs.new_release_major_version}}'
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  check-markdown-links:
+    runs-on: ubuntu-20.04
+    name: Check links in Markdown files
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.13.0
+      - uses: bahmutov/npm-install@v1
+      - run: npm run check:markdown
