@@ -56,6 +56,7 @@ jobs:
         id: cypress
         with:
           working-directory: examples/recording
+          command-prefix: '--'
           record: true
           parallel: true
           group: Recording example

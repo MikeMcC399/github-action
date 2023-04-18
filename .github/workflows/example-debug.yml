@@ -30,6 +30,8 @@ jobs:
           # This enables debug logging output for the action
           DEBUG: '@cypress/github-action'
         with:
+          command-prefix: '--'
+          browser: chrome
           working-directory: examples/basic
 
   cypress-debug:
