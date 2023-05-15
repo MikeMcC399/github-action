@@ -1,0 +1,20 @@
+name: Test Yarn no npx
+
+on:
+  workflow_dispatch:
+
+env:
+  DEBUG: '@cypress/github-action'
+
+jobs:
+
+  basic:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Cypress tests
+        uses: ./
+        with:
+          working-directory: examples/basic
