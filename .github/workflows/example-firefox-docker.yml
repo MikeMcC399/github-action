@@ -1,0 +1,14 @@
+name: example-firefox-docker
+on: workflow_dispatch
+jobs:
+  firefox:
+    runs-on: ubuntu-22.04
+    container:
+      image: cypress/browsers:node18.12.0-chrome106-ff106
+      options: --user 1001
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cypress-io/github-action@v5
+        with:
+          browser: firefox
+          working-directory: examples/firefox
