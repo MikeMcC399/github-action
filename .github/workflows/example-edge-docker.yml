@@ -1,0 +1,47 @@
+name: example-edge-docker
+on: workflow_dispatch
+jobs:
+
+  docker-browsers:
+    runs-on: ubuntu-22.04
+    container: cypress/browsers:latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cypress-io/github-action@v5
+        with:
+          browser: edge
+          working-directory: examples/browser
+
+  docker-included:
+    runs-on: ubuntu-22.04
+    container: cypress/included:latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cypress-io/github-action@v5
+        with:
+          browser: edge
+          working-directory: examples/browser
+
+  docker-browsers-user:
+    runs-on: ubuntu-22.04
+    container:
+      image: cypress/browsers:latest
+      options: --user 1001
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cypress-io/github-action@v5
+        with:
+          browser: edge
+          working-directory: examples/browser
+
+  docker-included-user:
+    runs-on: ubuntu-22.04
+    container:
+      image: cypress/browsers:latest
+      options: --user 1001
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cypress-io/github-action@v5
+        with:
+          browser: edge
+          working-directory: examples/browser
