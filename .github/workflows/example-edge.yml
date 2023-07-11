@@ -22,3 +22,21 @@ jobs:
           build: npm run info
           working-directory: examples/browser
           browser: edge
+          headed: false
+
+  tests-headed:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Cypress info
+        uses: ./
+        with:
+          # just for full picture after installing Cypress
+          # print information about detected browsers, etc
+          # see https://on.cypress.io/command-line#cypress-info
+          build: npm run info
+          working-directory: examples/browser
+          browser: edge
+          headed: true
