@@ -14,8 +14,8 @@
   },
   "private": true,
   "devDependencies": {
-    "cypress": "12.17.0",
+    "cypress": "12.17.1",
     "image-size": "^1.0.2",
-    "playwright-webkit": "1.35.1"
+    "playwright-webkit": "1.34"
   }
 }
