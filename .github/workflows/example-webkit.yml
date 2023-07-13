@@ -1,0 +1,45 @@
+name: example-webkit
+#
+# webkit support is currently experimental
+# https://docs.cypress.io/guides/guides/launching-browsers#WebKit-Experimental
+#
+on:
+  workflow_dispatch:
+
+jobs:
+  webkit-ubuntu:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Cypress info and test
+        uses: ./
+        with:
+          build: npx playwright@1.34.3 install-deps webkit
+          start: npm run info
+          working-directory: examples/webkit
+          browser: webkit
+
+  webkit-windows:
+    runs-on: windows-2022
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Cypress info and test
+        uses: ./
+        with:
+          start: npm run info
+          working-directory: examples/webkit
+          browser: webkit
+
+  webkit-macos:
+    runs-on: macos-12
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Cypress info and test
+        uses: ./
+        with:
+          start: npm run info
+          working-directory: examples/webkit
+          browser: webkit
