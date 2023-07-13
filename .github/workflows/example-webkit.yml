@@ -13,13 +13,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Install dependencies
-        run: |
-          npx playwright@1.34.3 install-deps webkit
-          npm ci --prefix examples/webkit
+        run: npx playwright@1.34.3 install-deps webkit
       - name: Cypress info and test
         uses: ./
         with:
-          install: false
           build: npm run info
           working-directory: examples/webkit
           browser: webkit
