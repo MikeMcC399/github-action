@@ -41,7 +41,7 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
-
+      - run: id
       - name: Cypress run
         uses: cypress-io/github-action@v5
         with:
