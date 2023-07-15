@@ -3,6 +3,9 @@ name: example-docker
 on:
   workflow_dispatch:
 
+env:
+  DEBUG: '@cypress/github-action'
+
 # jobs:
   # cypress-run:
   #   runs-on: ubuntu-22.04
