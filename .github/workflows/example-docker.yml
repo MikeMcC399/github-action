@@ -3,15 +3,30 @@ name: example-docker
 on:
   workflow_dispatch:
 
+# jobs:
+  # cypress-run:
+  #   runs-on: ubuntu-22.04
+  #   # Cypress Docker image with Chrome v106
+  #   # and Firefox v106 pre-installed
+  #   container: cypress/browsers:node18.12.0-chrome106-ff106
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: cypress-io/github-action@v5
+  #       with:
+  #         browser: chrome
+  #         working-directory: examples/basic
+
 jobs:
-  cypress-run:
-    runs-on: ubuntu-22.04
-    # Cypress Docker image with Chrome v106
-    # and Firefox v106 pre-installed
-    container: cypress/browsers:node18.12.0-chrome106-ff106
+  e2e:
+    name: End-to-end
+    runs-on: ubuntu-latest
+    container: cypress/included:10.11.0
+
     steps:
-      - uses: actions/checkout@v3
-      - uses: cypress-io/github-action@v5
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v4
         with:
-          browser: chrome
           working-directory: examples/basic
