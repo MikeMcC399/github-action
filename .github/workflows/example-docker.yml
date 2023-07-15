@@ -20,16 +20,29 @@ env:
   #         working-directory: examples/basic
 
 jobs:
+  # e2e:
+  #   name: End-to-end
+  #   runs-on: ubuntu-latest
+  #   container: cypress/included:10.11.0
+
+  #   steps:
+  #     - name: Checkout repo
+  #       uses: actions/checkout@v2
+
+  #     - name: Cypress run
+  #       uses: cypress-io/github-action@v4
+  #       with:
+  #         working-directory: examples/basic
   e2e:
     name: End-to-end
     runs-on: ubuntu-latest
-    container: cypress/included:10.11.0
+    container: cypress/included:12.17.1
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Cypress run
-        uses: cypress-io/github-action@v4
+        uses: cypress-io/github-action@v5
         with:
           working-directory: examples/basic
