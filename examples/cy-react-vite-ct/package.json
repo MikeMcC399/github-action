@@ -10,9 +10,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "12.17.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "vite": "^4.4.7"
+    "cypress": "^14.3.3",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "vite": "^6.3.5"
   }
 }
