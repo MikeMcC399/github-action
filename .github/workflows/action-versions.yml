@@ -17,10 +17,19 @@ name: action-versions
 # Warning: The `set-output` command is deprecated and will be disabled soon. Please upgrade to using Environment Files. For more information see: https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/
 # Deadline May 31, 2023
 
+## cypress-io/github-action@v4.2.1
+# Warning: The `set-output` command is deprecated and will be disabled soon. Please upgrade to using Environment Files. For more information see: https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/
+
+## cypress-io/github-action@v4.2.2
+# No current warnings or deprecations
+
 ## cypress-io/github-action@v4
 # No current warnings or deprecations
 
 ## cypress-io/github-action@v5
+# No current warnings or deprecations
+
+## cypress-io/github-action@v6
 # No current warnings or deprecations
 
 ## cypress-io/github-action@master
@@ -35,7 +44,7 @@ jobs:
   #   runs-on: ubuntu-22.04
   #   steps:
   #     - name: Checkout
-  #       uses: actions/checkout@v3
+  #       uses: actions/checkout@v4
   #     - name: Cypress tests
   #       uses: cypress-io/github-action@v1.25.3
   #       env:
@@ -48,7 +57,7 @@ jobs:
   #   runs-on: ubuntu-22.04
   #   steps:
   #     - name: Checkout
-  #       uses: actions/checkout@v3
+  #       uses: actions/checkout@v4
   #     - name: Cypress tests
   #       uses: cypress-io/github-action@v2
   #       with:
@@ -59,7 +68,7 @@ jobs:
   #   runs-on: ubuntu-22.04
   #   steps:
   #     - name: Checkout
-  #       uses: actions/checkout@v3
+  #       uses: actions/checkout@v4
   #     - name: Cypress tests
   #       uses: cypress-io/github-action@v3
   #       with:
@@ -70,7 +79,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Cypress tests
         # Supports Cypress v10 and later
         uses: cypress-io/github-action@v4.2.1
@@ -82,7 +91,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Cypress tests
         # Supports Cypress v10 and later
         uses: cypress-io/github-action@v4.2.2
@@ -94,7 +103,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Cypress tests
         # Supports Cypress v10 and later
         uses: cypress-io/github-action@v4
@@ -106,7 +115,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Cypress tests
         uses: cypress-io/github-action@v5
         with:
@@ -117,7 +126,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Cypress tests
         uses: cypress-io/github-action@v6
         with:
@@ -128,7 +137,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Cypress tests
         uses: cypress-io/github-action@master
         with:
