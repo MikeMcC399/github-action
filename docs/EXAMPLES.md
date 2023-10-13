@@ -18,6 +18,8 @@ Examples should ...
 - also be capable of running on `windows-latest`
 - and on `macos-latest`
 - not generate any GitHub deprecation notices
+- not generate any deprecation notices when built e.g. `npm ci`
+- not generate any vulnerability warnings e.g. `npm audit`
 
 ### Optional components
 
