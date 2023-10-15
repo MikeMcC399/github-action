@@ -1,0 +1,101 @@
+name: example-start-and-pnpm-workspaces
+on:
+  push:
+    branches:
+      - 'master'
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+
+  single:
+    # the example has pnpm workspace in its "root" folder
+    # examples/start-and-pnpm-workspaces
+    # and tests in a subfolder like "workspace-1"
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+      - name: Set up pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('examples/start-and-pnpm-workspaces/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+      - name: Set up Cypress binary cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/Cypress
+          key: cypress-${{ runner.os }}-cypress-${{ hashFiles('examples/start-and-pnpm-workspaces/pnpm-lock.yaml') }}
+
+      - run: pnpm install --frozen-lockfile
+        working-directory: examples/start-and-pnpm-workspaces
+      - name: Test workspace-1
+        uses: ./
+        with:
+          working-directory: examples/start-and-pnpm-workspaces/workspace-1
+          install: false
+          build: pnpm run build
+          start: pnpm start
+          wait-on: 'http://localhost:5000'
+
+  multiple:
+    # example with web application build,
+    # server start and waiting for the server
+    # to respond before running tests
+    # in each pnpm workspaces subfolder
+    runs-on: ubuntu-22.04
+    strategy:
+      # when one test fails, DO NOT cancel the other
+      # containers, because this will kill Cypress processes
+      # leaving the Cypress Cloud hanging ...
+      # https://github.com/cypress-io/github-action/issues/48
+      fail-fast: false
+      matrix:
+        workspace: [workspace-1, workspace-2]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+      - name: Set up pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('examples/start-and-pnpm-workspaces/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+      - name: Set up Cypress binary cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/Cypress
+          key: cypress-${{ runner.os }}-cypress-${{ hashFiles('examples/start-and-pnpm-workspaces/pnpm-lock.yaml') }}
+
+      - run: pnpm install --frozen-lockfile
+        working-directory: examples/start-and-pnpm-workspaces
+
+      - name: Test ${{ matrix.workspace }}
+        uses: ./
+        with:
+          working-directory: examples/start-and-pnpm-workspaces/${{ matrix.workspace }}
+          install: false
+          build: pnpm run build
+          start: pnpm start
+          wait-on: 'http://localhost:5000'
