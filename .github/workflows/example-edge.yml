@@ -26,6 +26,7 @@ jobs:
       - name: Cypress second test
         uses: ./
         with:
+          install: false
           working-directory: examples/browser
           browser: edge
           headed: false
