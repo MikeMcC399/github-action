@@ -23,6 +23,12 @@ jobs:
           working-directory: examples/browser
           browser: edge
           headed: false
+      - name: Cypress second test
+        uses: ./
+        with:
+          working-directory: examples/browser
+          browser: edge
+          headed: false
 
   tests-headed:
     runs-on: ubuntu-22.04
