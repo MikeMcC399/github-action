@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Cypress info
         uses: ./
@@ -40,3 +40,20 @@ jobs:
           working-directory: examples/browser
           browser: edge
           headed: true
+
+  tests-windows-headless:
+    runs-on: windows-2022
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cypress info
+        uses: ./
+        with:
+          # just for full picture after installing Cypress
+          # print information about detected browsers, etc
+          # see https://on.cypress.io/command-line#cypress-info
+          build: npm run info
+          working-directory: examples/browser
+          browser: edge
+          headed: false
