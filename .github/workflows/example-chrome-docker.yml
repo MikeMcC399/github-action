@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-22.04
     container: cypress/browsers:latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: cypress-io/github-action@v6
         with:
           browser: chrome
@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-22.04
     container: cypress/included:latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: cypress-io/github-action@v6
         with:
           browser: chrome
@@ -28,7 +28,7 @@ jobs:
       image: cypress/browsers:latest
       options: --user 1001
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: cypress-io/github-action@v6
         with:
           browser: chrome
@@ -40,7 +40,7 @@ jobs:
       image: cypress/browsers:latest
       options: --user 1001
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: cypress-io/github-action@v6
         with:
           browser: chrome
