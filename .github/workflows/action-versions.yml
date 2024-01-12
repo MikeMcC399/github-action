@@ -142,3 +142,15 @@ jobs:
         uses: cypress-io/github-action@master
         with:
           working-directory: examples/basic
+
+  # action-no-version:
+  #   if: always()
+  #   runs-on: ubuntu-22.04
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
+  #     - name: Cypress tests
+  #       # This is illegal syntax
+  #       uses: cypress-io/github-action
+  #       with:
+  #         working-directory: examples/basic
