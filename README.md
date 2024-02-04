@@ -984,7 +984,29 @@ jobs:
 
 ### Custom test command
 
-You can overwrite the Cypress run command with your own command.
+The Cypress GitHub Action collects the parameters you define in your workflow, such as `browser` choice or the selection of `spec` to run,
+and passes this programmatically to the Cypress [Module API](https://on.cypress.io/module-api) for execution.
+If you are converting a [Cypress CLI command](https://on.cypress.io/cli) or script
+to use in the Cypress GitHub Action you should move the command options you have in one line into multiple parameter lines.
+
+For instance, a Cypress E2E test on browser Google Chrome, running the test spec `my-test.cy.js` as a CLI command would be:
+
+```shell
+npx cypress run --browser chrome --spec my-test.cy.js
+```
+
+When this is converted to a GitHub Actions step it could look like this:
+
+```yml
+  - name: Cypress run
+    uses: cypress-io/github-action@v6
+    with:
+      browser: chrome
+      spec: my-test.cy.js
+```
+
+For advanced usage, the action parameter `command` allows running any command at the expense of making many other parameters unavailable.
+It is not recommended to use this parameter to copy an existing Cypress CLI command line or script and use it unchanged in the action.
 
 ```yml
 steps:
@@ -994,12 +1016,12 @@ steps:
   - name: Custom tests 🧪
     uses: cypress-io/github-action@v6
     with:
-      command: npm run e2e:ci
+      command: node .
 ```
 
 **Caution**: using the action parameter `command` causes multiple other parameters to be ignored including: `auto-cancel-after-failures`, `browser`, `ci-build-id`, `command-prefix`, `component`, `config`, `config-file`, `env`, `group`, `headed`, `parallel`, `project`, `publish-summary`, `quiet`, `record`, `spec` and `tag`.
 
-See [example-custom-command.yml](.github/workflows/example-custom-command.yml) file.
+The workflow [example-custom-command.yml](.github/workflows/example-custom-command.yml) demonstrates an advanced example which calls a JavaScript program to run Cypress via the [Module API](https://on.cypress.io/module-api).
 
 ### Custom build id
 
