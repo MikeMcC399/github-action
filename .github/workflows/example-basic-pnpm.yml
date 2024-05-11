@@ -6,6 +6,9 @@ on:
   pull_request:
   workflow_dispatch:
 
+env:
+  DEBUG: '@cypress/github-action'
+
 jobs:
 
   basic-pnpm-ubuntu-20:
