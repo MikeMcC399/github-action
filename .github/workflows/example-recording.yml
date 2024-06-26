@@ -10,7 +10,8 @@ on:
   pull_request:
   workflow_dispatch:
 
-permissions: {}
+permissions:
+  actions: none
 
 env:
   # Set up the Cypress Cloud project ID and record key as environment variables
