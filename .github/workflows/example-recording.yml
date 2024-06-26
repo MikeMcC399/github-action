@@ -10,6 +10,8 @@ on:
   pull_request:
   workflow_dispatch:
 
+permissions: {}
+
 env:
   # Set up the Cypress Cloud project ID and record key as environment variables
   # If the Actions secret EXAMPLE_PROJECT_ID is not defined then
