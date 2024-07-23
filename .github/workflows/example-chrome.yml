@@ -16,6 +16,8 @@ jobs:
 
       - name: Install Chrome for testing
         run: npx @puppeteer/browsers install chrome@stable
+      - run: ls -al
+      - run: ls ./chrome/linux-126.0.6478.182/chrome-linux64/chrome
 
       - name: Chrome headless
         uses: ./
