@@ -13,10 +13,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Install dependencies
+        uses: ./
+        with:
+          working-directory: examples/webkit
+          runTests: false
+      - name: Install playwright dependencies
         run: npx playwright install-deps webkit
       - name: Cypress info and test
         uses: ./
         with:
+          install: false
           build: npm run info
           working-directory: examples/webkit
           browser: webkit
