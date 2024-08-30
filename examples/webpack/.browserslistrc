@@ -1,1 +1,5 @@
-chrome >= 116
+[modern]
+last 2 versions
+
+[legacy]
+last 2 versions
