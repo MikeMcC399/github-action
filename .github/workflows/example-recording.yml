@@ -10,9 +10,7 @@ on:
   pull_request:
   workflow_dispatch:
 
-permissions:
-      contents: read # Required to checkout source code
-      id-token: write # Required to setup AWS credentials
+permissions: read-all
 
 env:
   # Set up the Cypress Cloud project ID and record key as environment variables
