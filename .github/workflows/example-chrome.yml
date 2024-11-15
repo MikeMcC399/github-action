@@ -13,6 +13,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Install Chrome separately
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: 137
+          install-dependencies: true
+
       - name: Chrome headless
         uses: ./
         with:
