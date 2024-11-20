@@ -19,11 +19,8 @@ jobs:
       fail-fast: false
       matrix:
         os:
-          - ubuntu-22.04
-          - ubuntu-24.04
-          - windows-2025
-          - macos-26
-          - macos-26-intel
+          - macos-15
+          - macos-15-intel
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
@@ -46,11 +43,8 @@ jobs:
       fail-fast: false
       matrix:
         os:
-          - ubuntu-22.04
-          - ubuntu-24.04
-          - windows-2025
-          - macos-26
-          - macos-26-intel
+          - macos-15
+          - macos-15-intel
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
