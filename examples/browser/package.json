@@ -13,7 +13,7 @@
   },
   "private": true,
   "devDependencies": {
-    "cypress": "13.16.1",
+    "cypress": "https://cdn.cypress.io/beta/npm/13.17.0/linux-x64/develop-0c3c497c1d8904dc0070321cd622a853822b14c7/cypress.tgz",
     "image-size": "^1.0.2"
   }
 }
