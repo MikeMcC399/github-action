@@ -31,4 +31,5 @@ jobs:
           # print information about detected browsers, etc
           # see https://on.cypress.io/command-line#cypress-info
           build: npx cypress info
-          env: LIBGL_ALWAYS_SOFTWARE=1
+        env:
+          LIBGL_ALWAYS_SOFTWARE: 1
