@@ -9,6 +9,9 @@ on:
 jobs:
   cypress-run:
     runs-on: ubuntu-24.04
+    container:
+      image: cypress/included:14.0.0
+      options: --user 1001
     steps:
       - name: Checkout
         uses: actions/checkout@v4
