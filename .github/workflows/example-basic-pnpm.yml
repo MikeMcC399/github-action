@@ -23,10 +23,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Disable integrity checks
-        run: |
-          echo COREPACK_INTEGRITY_KEYS=0 >> $GITHUB_ENV
-      - run: echo $COREPACK_INTEGRITY_KEYS
+      # - name: Disable integrity checks
+      #   run: |
+      #     echo COREPACK_INTEGRITY_KEYS=0 >> $GITHUB_ENV
+      # - run: echo $COREPACK_INTEGRITY_KEYS
 
       - run: corepack -v
       - run: corepack enable pnpm
@@ -37,6 +37,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
+
+      - run: |
+          npm install -g corepack
+          corepack install
+          pnpm install --frozen-lockfile
+        working-directory: examples/basic-pnpm
 
       - run: corepack -v
 
