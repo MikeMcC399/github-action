@@ -28,7 +28,9 @@ jobs:
       #     echo COREPACK_INTEGRITY_KEYS=0 >> $GITHUB_ENV
       # - run: echo $COREPACK_INTEGRITY_KEYS
 
-      - run: corepack -v
+      - name: Default Corepack
+        run: corepack -v
+
       - run: corepack enable pnpm
         working-directory: examples/basic-pnpm
 
@@ -38,13 +40,17 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
+      - name: Corepack from Node.js
+        run: corepack -v
+
       - run: |
-          npm install -g corepack
+          npm install -g corepack@latest
           corepack install
           pnpm install --frozen-lockfile
         working-directory: examples/basic-pnpm
 
-      - run: corepack -v
+      - name: Latest Corepack
+        run: corepack -v
 
       - name: Cypress tests
         # if you copy this workflow to another repository
