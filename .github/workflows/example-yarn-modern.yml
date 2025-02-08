@@ -13,10 +13,19 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - run: corepack enable yarn # experimental - see https://nodejs.org/docs/latest/api/corepack.html
-      - name: Custom Yarn command
+
+        # Corepack is experimental - see https://nodejs.org/docs/latest/api/corepack.html
+        # To avoid Corepack issues with key integrity checks, we use the latest version
+        # and install dependencies before using the action
+      - name: Install latest Corepack
+        run: npm install -g corepack@latest
+      - run: corepack enable yarn
+      - name: Install dependencies
+        run: yarn install --immutable
+        working-directory: examples/yarn-modern
+
+      - name: Cypress run
         uses: ./
         with:
           working-directory: examples/yarn-modern
-          # https://yarnpkg.com/cli/install
-          install-command: yarn install
+          install: false
