@@ -6,6 +6,9 @@ on:
   pull_request:
   workflow_dispatch:
 
+env:
+  COREPACK_DEFAULT_TO_LATEST: 0
+
 jobs:
 
   basic-pnpm:
