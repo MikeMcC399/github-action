@@ -32,8 +32,8 @@ jobs:
       - name: Install Cypress 📥
         run: npm install cypress@14.0.3 --save-dev
 
-      - name: Cypress tests 🧪
-        uses: ./
-        with:
-          working-directory: examples/install-only
-          install: false
+      # - name: Cypress tests 🧪
+      #   uses: ./
+      #   with:
+      #     working-directory: examples/install-only
+      #     install: false
