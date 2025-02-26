@@ -1,0 +1,6 @@
+LICENSE.md
+renovate.json
+package-lock.json
+
+dist/
+examples/
