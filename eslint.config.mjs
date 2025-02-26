@@ -1,6 +1,7 @@
 import globals from 'globals'
 import pluginJs from '@eslint/js'
 import pluginCypress from 'eslint-plugin-cypress/flat'
+import stylistic from '@stylistic/eslint-plugin'
 
 export default [
   pluginJs.configs.recommended,
@@ -17,5 +18,9 @@ export default [
         ...globals.node
       }
     }
+  },
+  { name: 'examples-style',
+    files: ['examples/**/*.js'],
+    ...stylistic.configs.recommended
   }
 ]
