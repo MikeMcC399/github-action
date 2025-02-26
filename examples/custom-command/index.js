@@ -4,15 +4,15 @@ const cypress = require('cypress')
 const _ = require('lodash')
 const fs = require('fs')
 
-cypress.run().then(results => {
+cypress.run().then((results) => {
   const summary = _.pickBy(results, (value, key) =>
-    key.startsWith('total')
+    key.startsWith('total'),
   )
   console.log(summary)
   fs.writeFileSync(
     'results.json',
     JSON.stringify(summary, null, 2) + '\n',
-    'utf8'
+    'utf8',
   )
   console.log('saved file results.json')
 })
