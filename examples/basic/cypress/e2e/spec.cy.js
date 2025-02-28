@@ -1,12 +1,10 @@
-it('works', () => {
-  expect(40).to.equal(21 + 21)
-  cy.visit('https://example.cypress.io').then(() => {
-    expect('hello').to.equal('hello')
+describe('My First Test', () => {
+  it('Does not do much and fails!', () => {
+    cy.visit("/")
+    cy.get("#DoesNotExist")
   })
-})
-it('works', () => {
-  expect(40).to.equal(20 + 20)
-  cy.visit('https://example.cypress.io').then(() => {
-    expect('hello').to.equal('hello')
+
+  it('Does not do much!', () => {
+    cy.visit("/")
   })
 })
