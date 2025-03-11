@@ -10,13 +10,7 @@ permissions:
 
 jobs:
   firefox:
-    strategy:
-      fail-fast: false
-      matrix:
-        os:
-          - ubuntu-26.04
-          - ubuntu-26.04-arm
-    runs-on: ${{ matrix.os }}
+    runs-on: windows-2022
     steps:
       - name: Checkout
         uses: actions/checkout@v7
