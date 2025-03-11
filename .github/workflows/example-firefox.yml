@@ -22,11 +22,26 @@ jobs:
           working-directory: examples/browser
           browser: firefox
 
-      # report screenshot size and store the screenshots as test artifacts
-      - uses: actions/upload-artifact@v4
+      - name: Firefox 2
+        uses: ./
         with:
-          name: screenshots-in-firefox
-          path: examples/browser/cypress/screenshots
+          working-directory: examples/browser
+          browser: firefox
 
-      - run: npx image-size cypress/screenshots/**/*.png
-        working-directory: examples/browser
+      - name: Firefox 3
+        uses: ./
+        with:
+          working-directory: examples/browser
+          browser: firefox
+
+      - name: Firefox 4
+        uses: ./
+        with:
+          working-directory: examples/browser
+          browser: firefox
+
+      - name: Firefox 5
+        uses: ./
+        with:
+          working-directory: examples/browser
+          browser: firefox
