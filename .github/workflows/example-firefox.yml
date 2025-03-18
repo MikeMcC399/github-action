@@ -1,10 +1,11 @@
 name: example-firefox
 on:
-  push:
-    branches:
-      - 'master'
-  pull_request:
   workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash
+    working-directory: examples/browser
 
 jobs:
   firefox:
@@ -13,35 +14,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Firefox
-        uses: ./
-        timeout-minutes: 10
-        with:
-          # let's show browser and system info
-          build: npx cypress info
-          working-directory: examples/browser
-          browser: firefox
+      - name: Install dependencies
+        run: npm ci
 
-      - name: Firefox 2
-        uses: ./
-        with:
-          working-directory: examples/browser
-          browser: firefox
-
-      - name: Firefox 3
-        uses: ./
-        with:
-          working-directory: examples/browser
-          browser: firefox
-
-      - name: Firefox 4
-        uses: ./
-        with:
-          working-directory: examples/browser
-          browser: firefox
-
-      - name: Firefox 5
-        uses: ./
-        with:
-          working-directory: examples/browser
-          browser: firefox
+      - name: Firefox run multiple times
+        run: |
+          for i in {1..5}
+          do
+            npx cypress run -b firefox
+          done
