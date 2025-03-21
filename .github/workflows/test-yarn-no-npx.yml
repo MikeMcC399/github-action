@@ -7,7 +7,6 @@ env:
   DEBUG: '@cypress/github-action'
 
 jobs:
-
   basic:
     runs-on: ubuntu-22.04
     steps:
