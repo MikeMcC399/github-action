@@ -4,9 +4,9 @@ jobs:
   install:
     runs-on: ubuntu-22.04
     steps:
-        - run: npm init -y
-        - run: npm install cypress --ignore-scripts # install Cypress npm module only
-        - run: npx cypress install # install Cypress binary
-          env:
-            DEBUG: 'cypress:*'
-        - run: npx cypress verify
+      - run: npm init -y
+      - run: npm install cypress --ignore-scripts # install Cypress npm module only
+      - run: npx cypress install # install Cypress binary
+        env:
+          DEBUG: 'cypress:*'
+      - run: npx cypress verify
