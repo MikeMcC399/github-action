@@ -1,6 +1,7 @@
 {
   "name": "example-basic",
   "version": "1.0.0",
+  "type": "module",
   "description": "basic example how to run Cypress tests",
   "main": "index.js",
   "scripts": {
@@ -8,6 +9,7 @@
   },
   "private": true,
   "devDependencies": {
-    "cypress": "14.2.0"
+    "cypress": "^14.2.0",
+    "typescript": "^5.8.2"
   }
 }
