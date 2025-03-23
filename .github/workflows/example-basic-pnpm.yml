@@ -8,7 +8,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - run: npm install corepack@0.31.0 -g
-      - run: corepack enable pnpm
+      # - run: corepack enable pnpm
       - name: Cypress tests
         # if you copy this workflow to another repository
         # take the next line as replacement for ./
