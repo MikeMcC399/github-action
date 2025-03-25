@@ -12,12 +12,21 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-22.04, ubuntu-24.04, windows-2022, macos-14]
+        os: [ubuntu-20.04,
+            ubuntu-22.04,
+            ubuntu-24.04,
+            windows-2019,
+            windows-2022,
+            windows-2025,
+            macos-13,
+            macos-14,
+            macos-15,
+            ]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
+      - run: node --version
       - name: Cypress tests
         # normally you would write
         # uses: cypress-io/github-action@v6
@@ -31,4 +40,4 @@ jobs:
           # see https://on.cypress.io/command-line#cypress-info
           build: npx cypress info
         env:
-          NODE_OPTIONS: "--no-experimental-require-module"
+          NODE_OPTIONS: "--no-experimental-detect-module --no-experimental-require-module"
