@@ -9,7 +9,7 @@
   },
   "private": true,
   "devDependencies": {
-    "cypress": "^14.2.0",
+    "cypress": "https://cdn.cypress.io/beta/npm/14.2.1/linux-x64/develop-e05287d9a4091ee05df79d4bd54a4e13f628d177/cypress.tgz",
     "typescript": "^5.8.2"
   }
 }
