@@ -7,6 +7,9 @@ on:
   pull_request:
   workflow_dispatch:
 
+env:
+  DEBUG: '@cypress/github-action' # enable debug logs for the action
+
 jobs:
   basic:
     strategy:
