@@ -6,6 +6,9 @@ on:
   pull_request:
   workflow_dispatch:
 
+env:
+  CYPRESS_CONNECT_RETRY_THRESHOLD: 20
+
 jobs:
   tests:
     name: all os
