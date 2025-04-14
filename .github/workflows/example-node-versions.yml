@@ -1,31 +1,33 @@
 name: example-node-versions
 on:
-  push:
-    branches:
-      - 'master'
-  pull_request:
   workflow_dispatch:
 
 jobs:
-  cypress-run:
-    runs-on: ubuntu-24.04
-    # let's make sure Cypress works on several versions of Node
+  show-default-node:
     strategy:
       fail-fast: false
       matrix:
-        node: [20, 22, 24]
-    name: Cypress E2E on Node v${{ matrix.node }}
+        os:
+          - ubuntu-24.04
+          - ubuntu-22.04
+          - ubuntu-24.04-arm
+          - ubuntu-22.04-arm
+          - windows-2025
+          - windows-2022
+          - windows-2019
+          - windows-11-arm
+    runs-on: ${{ matrix.os }}
     steps:
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node }}
       - run: node -v
       - run: npm -v
-
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - uses: ./
-        with:
-          working-directory: examples/node-versions
+      - run: corepack -v
+      - name: Show runner infos
+        run: |
+          node -p "'OS type:     ' + os.type()"
+          node -p "'OS version:  ' + os.version()"
+          node -p "'OS release:  ' + os.release()"
+          node -p "'OS platform: ' + os.platform()"
+          node -p "'OS arch:     ' + os.arch()"
+          node -p "'OS machine:  ' + os.machine()"
+          echo "OS cpus:"
+          node -p "os.cpus()"
