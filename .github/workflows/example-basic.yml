@@ -7,17 +7,25 @@ on:
   pull_request:
   workflow_dispatch:
 
+env:
+  DEBUG: 'cypress:cli*'
+
 jobs:
   basic:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-22.04, ubuntu-24.04, windows-2025, macos-15]
+        os: [windows-11-arm]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
+      - run: node -v
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node -v
       - name: Cypress tests
         # normally you would write
         # uses: cypress-io/github-action@v6
