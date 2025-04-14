@@ -7,26 +7,48 @@ on:
   pull_request:
   workflow_dispatch:
 
+env:
+  CYPRESS_DOWNLOAD_PATH_TEMPLATE: '${endpoint}/win32-x64/cypress.zip'
+  CYPRESS_CACHE_FOLDER: $HOME/.cache/Cypress
+  DEBUG: 'cypress:cli*'
+
 jobs:
   basic:
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-22.04, ubuntu-24.04, windows-2025, macos-15]
-    runs-on: ${{ matrix.os }}
+    runs-on: windows-11-arm
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Cypress tests
-        # normally you would write
-        # uses: cypress-io/github-action@v6
-        uses: ./
-        # the parameters below are only necessary
-        # because we are running these examples in a monorepo
+      - run: node -v
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
+          node-version: 22
+      - run: node -v
+      - run: npm install npm@latest -g
+      - run: npm -v
+      - run: npm ci
+        working-directory: examples/basic
+        env:
+          CYPRESS_INSTALL_BINARY: 0
+      - run: npx cypress install
+        working-directory: examples/basic
+        env:
+          DEBUG: 'cypress:cli*'
+          CYPRESS_DOWNLOAD_PATH_TEMPLATE: '${endpoint}/win32-x64/cypress.zip'
+      - run: npx cypress cache list
+        working-directory: examples/basic
+      - run: npx cypress verify
+        working-directory: examples/basic
+        env:
+          DEBUG: 'cypress:*'
+      - run: npx cypress info
+        working-directory: examples/basic
+        env:
+          DEBUG: 'cypress:*'
+      - name: Cypress tests
+        uses: ./
+        with:
+          install: false
           working-directory: examples/basic
-          # just for full picture after installing Cypress
-          # print information about detected browsers, etc
-          # see https://on.cypress.io/command-line#cypress-info
-          build: npx cypress info
+        env:
+          DEBUG: 'cypress:*,@cypress/github-action'

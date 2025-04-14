@@ -4,10 +4,12 @@
   "description": "basic example how to run Cypress tests",
   "main": "index.js",
   "scripts": {
-    "test": "cypress run"
+    "test": "cypress run",
+    "postinstall": "patch-package"
   },
   "private": true,
   "devDependencies": {
-    "cypress": "14.4.0"
+    "cypress": "14.3.1",
+    "patch-package": "^8.0.0"
   }
 }
