@@ -1,0 +1,15 @@
+diff --git a/node_modules/cypress/lib/tasks/install.js b/node_modules/cypress/lib/tasks/install.js
+index 9e15a2c..127eb5a 100644
+--- a/node_modules/cypress/lib/tasks/install.js
++++ b/node_modules/cypress/lib/tasks/install.js
+@@ -133,8 +133,9 @@ const downloadAndUnzip = ({
+   return Promise.resolve(tasks.run());
+ };
+ const validateOS = () => {
++  debug('patched for win32-arm64')
+   return util.getPlatformInfo().then(platformInfo => {
+-    return platformInfo.match(/(win32-x64|linux-x64|linux-arm64|darwin-x64|darwin-arm64)/);
++    return platformInfo.match(/(win32-x64|win32-arm64|linux-x64|linux-arm64|darwin-x64|darwin-arm64)/);
+   });
+ };
+ 
