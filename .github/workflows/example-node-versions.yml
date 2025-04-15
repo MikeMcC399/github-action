@@ -1,20 +1,20 @@
 name: example-node-versions
 on:
-  push:
-    branches:
-      - 'master'
-  pull_request:
   workflow_dispatch:
 
 jobs:
-  cypress-run:
+  show-default-node:
     runs-on: windows-11-arm
-    # let's make sure Cypress works on several versions of Node
+    steps:
+      - run: node -v
+      - run: npm -v
+  show-nodes:
+    runs-on: windows-11-arm
     strategy:
       fail-fast: false
       matrix:
         node: [18, 20, 22, 23]
-    name: Cypress E2E on Node v${{ matrix.node }}
+    name: Use Node v${{ matrix.node }}
     steps:
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -22,10 +22,3 @@ jobs:
           node-version: ${{ matrix.node }}
       - run: node -v
       - run: npm -v
-
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - uses: ./
-        with:
-          working-directory: examples/node-versions
