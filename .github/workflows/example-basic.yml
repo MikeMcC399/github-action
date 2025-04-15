@@ -17,7 +17,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
+      - run: node -v
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node -v
       - name: Cypress tests
         # normally you would write
         # uses: cypress-io/github-action@v6
