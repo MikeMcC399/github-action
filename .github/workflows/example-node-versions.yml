@@ -6,6 +6,7 @@ jobs:
   show-default-node:
     runs-on: windows-11-arm
     steps:
+      - run: systeminfo
       - run: node -v
       - run: npm -v
   show-nodes:
