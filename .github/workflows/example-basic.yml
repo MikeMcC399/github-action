@@ -34,7 +34,6 @@ jobs:
         working-directory: examples/basic
         env:
           DEBUG: 'cypress:cli*'
-          CYPRESS_DOWNLOAD_PATH_TEMPLATE: '${endpoint}/win32-x64/cypress.zip'
       - run: npx cypress cache list
         working-directory: examples/basic
       - run: npx cypress verify
