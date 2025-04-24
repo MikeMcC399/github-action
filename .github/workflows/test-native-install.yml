@@ -1,8 +1,12 @@
 name: Test Cypress install # native installation of Cypress
 on: workflow_dispatch
 jobs:
-  install:
-    runs-on: ubuntu-22.04
+  install-native:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-2025, macos-14]
+    runs-on: ${{ matrix.os }}
     steps:
       - run: npm init -y
       - run: npm install cypress --ignore-scripts # install Cypress npm module only
@@ -10,3 +14,17 @@ jobs:
         env:
           DEBUG: 'cypress:*'
       - run: npx cypress verify
+  install-action:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-2025, macos-14]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Cypress Action install only
+        uses: ./
+        with:
+          working-directory: examples/basic
+          runTests: false # do not run tests, just install Cypress
