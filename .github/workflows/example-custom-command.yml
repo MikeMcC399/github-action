@@ -6,6 +6,9 @@ on:
   pull_request:
   workflow_dispatch:
 
+env:
+  DEBUG: '@cypress/github-action,cypress:*'
+
 jobs:
   start:
     # example where instead of forming the default "cypress run ..."
