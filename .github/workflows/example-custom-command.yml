@@ -11,6 +11,9 @@ on:
   pull_request:
   workflow_dispatch:
 
+env:
+  DEBUG: '@cypress/github-action,cypress:*'
+
 jobs:
   start:
     runs-on: ubuntu-24.04
