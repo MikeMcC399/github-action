@@ -18,7 +18,7 @@ jobs:
       - name: Custom tests 🧪
         uses: ./
         with:
-          command: npx cypress run
+          command-prefix: percy exec -- npx
           working-directory: examples/custom-command
           auto-cancel-after-failures: true
           browser: none
