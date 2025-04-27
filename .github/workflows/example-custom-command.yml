@@ -18,8 +18,20 @@ jobs:
       - name: Custom tests 🧪
         uses: ./
         with:
-          command: npm run custom-test
+          command: npx cypress run
           working-directory: examples/custom-command
-
-      - name: Show saved file 🖨
-        run: cat examples/custom-command/results.json
+          auto-cancel-after-failures: true
+          browser: none
+          ci-build-id: 12345
+          component: true
+          config: baseUrl=http://localhost:3000
+          config-file: missing.json
+          env: MY_ENV_VAR=12345
+          group: my-group
+          headed: true
+          parallel: true
+          project: my-project
+          quiet: true
+          record: true
+          spec: missing.cy.js
+          tag: my-tag
