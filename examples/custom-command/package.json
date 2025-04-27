@@ -9,6 +9,8 @@
   },
   "private": true,
   "devDependencies": {
+    "@percy/cli": "^1.30.10",
+    "@percy/cypress": "^3.1.6",
     "cypress": "14.3.2",
     "lodash": "4.17.21"
   }
