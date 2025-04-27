@@ -20,7 +20,7 @@ jobs:
         with:
           command-prefix: percy exec -- npx
           working-directory: examples/custom-command
-          auto-cancel-after-failures: true
+          auto-cancel-after-failures: 5
           browser: none
           ci-build-id: 12345
           component: true
