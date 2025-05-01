@@ -39,7 +39,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
       - name: Cypress action debug logs
         uses: ./
         env:
@@ -71,6 +74,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Install corepack
+        run: npm install -g corepack
       - name: Cypress action debug logs
         uses: ./
         env:
