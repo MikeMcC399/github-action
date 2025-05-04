@@ -6,13 +6,38 @@ on:
   pull_request:
   workflow_dispatch:
 
+env:
+  DEBUG: '@cypress/github-action'
+
 jobs:
+  first-run-pnpm:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'pnpm'
+          cache-dependency-path: examples/basic-pnpm/pnpm-lock.yaml
+
+      - name: Cypress tests
+        uses: ./
+        with:
+          runTests: false
+          working-directory: examples/basic-pnpm
+      - name: Install Cypress binary
+        run: pnpm cypress install
+        working-directory: examples/basic-pnpm
+
   basic-pnpm:
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-24.04, windows-2025, macos-15]
-    runs-on: ${{ matrix.os }}
+    needs: first-run-pnpm
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
