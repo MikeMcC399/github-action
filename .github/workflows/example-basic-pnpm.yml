@@ -25,14 +25,8 @@ jobs:
           node-version: 22
           cache: 'pnpm'
           cache-dependency-path: examples/basic-pnpm/pnpm-lock.yaml
-
-      - name: Cypress tests
-        uses: ./
-        with:
-          runTests: false
-          working-directory: examples/basic-pnpm
-      - name: Remove Cypress binary
-        run: pnpm cypress cache clear
+      - name: Install Cypress and dependencies
+        run: pnpm install
         working-directory: examples/basic-pnpm
 
   basic-pnpm:
@@ -63,6 +57,3 @@ jobs:
         uses: ./
         with:
           working-directory: examples/basic-pnpm
-          # print information about detected browsers, etc
-          # see https://on.cypress.io/command-line#cypress-info
-          build: pnpm exec cypress info
