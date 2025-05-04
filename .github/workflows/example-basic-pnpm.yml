@@ -31,8 +31,8 @@ jobs:
         with:
           runTests: false
           working-directory: examples/basic-pnpm
-      - name: Install Cypress binary
-        run: pnpm cypress install
+      - name: Remove Cypress binary
+        run: pnpm cypress cache clear
         working-directory: examples/basic-pnpm
 
   basic-pnpm:
