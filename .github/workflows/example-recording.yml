@@ -41,7 +41,7 @@ jobs:
       fail-fast: false
       matrix:
         # run copies of the current job in parallel
-        containers: [1, 2]
+        boxes: [fred, joe]
     if: needs.check-record-key.outputs.record-key-exists == 'true'
     steps:
       - name: Checkout
