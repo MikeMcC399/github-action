@@ -1,5 +1,5 @@
-[modern]
-last 2 versions
+# Use example from https://github.com/browserslist/browserslist
+# Browsers that we support
 
-[legacy]
-last 2 versions
+defaults and fully supports es6-module
+maintained node versions
