@@ -19,14 +19,25 @@ name: action-versions
 
 ## cypress-io/github-action@v4.2.1
 # Warning: The `set-output` command is deprecated and will be disabled soon. Please upgrade to using Environment Files. For more information see: https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/
+# Restoring NPM cache error: Cache service responded with 422
+# Runs in Node.js 20
 
 ## cypress-io/github-action@v4.2.2
-# No current warnings or deprecations
+# Restoring NPM cache error: Cache service responded with 422
+# Runs in Node.js 20
 
 ## cypress-io/github-action@v4
-# No current warnings or deprecations
+# Restoring NPM cache error: Cache service responded with 422
+# Runs in Node.js 20
 
 ## cypress-io/github-action@v5
+# Warning: Failed to restore: Cache service responded with 422
+# Runs in Node.js 20
+
+## cypress-io/github-action@v6.7.8
+# Warning: Failed to restore: Cache service responded with 422
+
+## cypress-io/github-action@v6.7.9
 # No current warnings or deprecations
 
 ## cypress-io/github-action@v6
@@ -74,50 +85,72 @@ jobs:
   #       with:
   #         working-directory: examples/v9/basic
 
-  action-v4-2-1:
+  # action-v4-2-1:
+  #   if: always()
+  #   runs-on: ubuntu-24.04
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
+  #     - name: Cypress tests
+  #       # Supports Cypress v10 and later
+  #       uses: cypress-io/github-action@v4.2.1
+  #       with:
+  #         working-directory: examples/basic
+
+  # action-v4-2-2:
+  #   if: always()
+  #   runs-on: ubuntu-24.04
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
+  #     - name: Cypress tests
+  #       # Supports Cypress v10 and later
+  #       uses: cypress-io/github-action@v4.2.2
+  #       with:
+  #         working-directory: examples/basic
+
+  # action-v4:
+  #   if: always()
+  #   runs-on: ubuntu-24.04
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
+  #     - name: Cypress tests
+  #       # Supports Cypress v10 and later
+  #       uses: cypress-io/github-action@v4
+  #       with:
+  #         working-directory: examples/basic
+
+  # action-v5:
+  #   if: always()
+  #   runs-on: ubuntu-24.04
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
+  #     - name: Cypress tests
+  #       uses: cypress-io/github-action@v5
+  #       with:
+  #         working-directory: examples/basic
+
+  action-v6-7-8:
     if: always()
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Cypress tests
-        # Supports Cypress v10 and later
-        uses: cypress-io/github-action@v4.2.1
+        uses: cypress-io/github-action@v6.7.8
         with:
           working-directory: examples/basic
 
-  action-v4-2-2:
+  action-v6-7-9:
     if: always()
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Cypress tests
-        # Supports Cypress v10 and later
-        uses: cypress-io/github-action@v4.2.2
-        with:
-          working-directory: examples/basic
-
-  action-v4:
-    if: always()
-    runs-on: ubuntu-24.04
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Cypress tests
-        # Supports Cypress v10 and later
-        uses: cypress-io/github-action@v4
-        with:
-          working-directory: examples/basic
-
-  action-v5:
-    if: always()
-    runs-on: ubuntu-24.04
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Cypress tests
-        uses: cypress-io/github-action@v5
+        uses: cypress-io/github-action@v6.7.9
         with:
           working-directory: examples/basic
 
