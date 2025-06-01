@@ -12,6 +12,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - run: node --version
 
       - name: Firefox
         uses: ./
