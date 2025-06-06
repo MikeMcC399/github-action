@@ -4,18 +4,42 @@ on:
 
 jobs:
   show-default-node:
-    runs-on: windows-11-arm
-    steps:
-      - run: systeminfo
-      - run: node -v
-      - run: npm -v
-  show-nodes:
-    runs-on: windows-11-arm
     strategy:
       fail-fast: false
       matrix:
-        node: [20, 22, 24]
-    name: Cypress E2E on Node v${{ matrix.node }}
+        os:
+          - ubuntu-22.04-arm
+          - ubuntu-24.04-arm
+          - windows-11-arm
+    runs-on: ${{ matrix.os }}
+    steps:
+      - run: node -v
+      - run: npm -v
+      - name: Show runner infos
+        run: |
+          node -p "'OS type:     ' + os.type()"
+          node -p "'OS version:  ' + os.version()"
+          node -p "'OS release:  ' + os.release()"
+          node -p "'OS platform: ' + os.platform()"
+          node -p "'OS arch:     ' + os.arch()"
+          node -p "'OS machine:  ' + os.machine()"
+          echo "OS cpus:"
+          node -p "os.cpus()"
+
+  show-nodes:
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-22.04-arm
+          - ubuntu-24.04-arm
+          - windows-11-arm
+        node:
+          - 20
+          - 22
+          - 24
+    runs-on: ${{ matrix.os }}
+    name: Node v${{ matrix.node }}
     steps:
       - name: Setup Node
         uses: actions/setup-node@v4
