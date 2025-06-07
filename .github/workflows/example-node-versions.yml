@@ -39,7 +39,6 @@ jobs:
           - 22
           - 24
     runs-on: ${{ matrix.os }}
-    name: Node v${{ matrix.node }}
     steps:
       - name: Setup Node
         uses: actions/setup-node@v4
