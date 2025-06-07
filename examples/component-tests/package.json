@@ -17,7 +17,7 @@
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "@vitejs/plugin-react": "^4.3.4",
-    "cypress": "14.4.1",
+    "cypress": "https://cdn.cypress.io/beta/npm/15.0.0/win32-x64/release/15.0.0-f369f50045685648b94d05ab6426099ee80d1245/cypress.tgz",
     "vite": "^6.3.4"
   }
 }
