@@ -47,3 +47,9 @@ jobs:
           node-version: ${{ matrix.node }}
       - run: node -v
       - run: npm -v
+      - run: |
+          node -p "'OS platform: ' + os.platform()"
+          node -p "'OS arch:     ' + os.arch()"
+          node -p "'OS machine:  ' + os.machine()"
+          echo "OS cpus:"
+          node -p "os.cpus()"
