@@ -18,6 +18,5 @@ jobs:
           corepack enable yarn
 
       - name: Test with Yarn Classic
-        uses: ./
-        with:
-          working-directory: examples/yarn-classic
+        run: yarn install --frozen-lockfile
+        working-directory: examples/yarn-classic
