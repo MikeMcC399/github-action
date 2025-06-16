@@ -12,6 +12,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - run: rm /usr/local/bin/yarn
+      - run: |
+          npm install corepack@latest -g
+          corepack enable yarn
 
       - name: Test with Yarn Classic
         uses: ./
