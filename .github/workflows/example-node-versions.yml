@@ -14,7 +14,6 @@ jobs:
           - ubuntu-22.04-arm
           - windows-2025
           - windows-2022
-          - windows-2019
           - windows-11-arm
     runs-on: ${{ matrix.os }}
     steps:
