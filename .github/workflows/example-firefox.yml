@@ -7,27 +7,86 @@ on:
   workflow_dispatch:
 
 jobs:
-  firefox:
-    runs-on: ubuntu-24.04-arm
+  # firefox-ubuntu-arm:
+  #   runs-on: ubuntu-24.04-arm
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
+  #     - run: node --version
+
+  #     - name: Firefox default browser
+  #       uses: ./
+  #       timeout-minutes: 3
+  #       with:
+  #         build: npx cypress info
+  #         working-directory: examples/browser
+  #         browser: firefox
+
+      # - name: Firefox latest install
+      #   uses: browser-actions/setup-firefox@v1
+
+      # - name: Firefox latest test
+      #   uses: ./
+      #   timeout-minutes: 3
+      #   with:
+      #     install: false
+      #     build: npx cypress info
+      #     working-directory: examples/browser
+      #     browser: firefox
+
+  firefox-windows:
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+#          - windows-2025
+          - windows-11-arm
+        firefox-version:
+          - ''
+          # - latest
+          # - latest-esr
+          # - '139.0.4'
+          # - '140.0esr'
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - run: node --version
 
-      - name: Firefox
-        uses: ./
-        timeout-minutes: 3
+      - name: show node version
+        run: node --version
+
+      - name: Node.js 22 setup
+        uses: actions/setup-node@v4
         with:
-          # let's show browser and system info
+          node-version: '22'
+          check-latest: true
+
+      # - name: show firefox default version
+      #   run: firefox --version
+
+      - name: Cypress test Firefox default
+        uses: ./
+        timeout-minutes: 5
+        with:
           build: npx cypress info
           working-directory: examples/browser
           browser: firefox
 
-      # report screenshot size and store the screenshots as test artifacts
-      - uses: actions/upload-artifact@v4
+      - name: Firefox ${{ matrix.firefox-version }}
+        id: setup-firefox
+        uses: browser-actions/setup-firefox@v1
         with:
-          name: screenshots-in-firefox
-          path: examples/browser/cypress/screenshots
+          firefox-version: ${{ matrix.firefox-version }}
 
-      - run: npx image-size cypress/screenshots/**/*.png
-        working-directory: examples/browser
+      # - run: |
+      #     echo Installed firefox versions: ${{ steps.setup-firefox.outputs.firefox-version }}
+      #     ${{ steps.setup-firefox.outputs.firefox-path }} --version
+
+      - name: Cypress test Firefox ${{ matrix.firefox-version }}
+        uses: ./
+        timeout-minutes: 5
+        with:
+            install: false
+            build: npx cypress info
+            working-directory: examples/browser
+            browser: ${{ steps.setup-firefox.outputs.firefox-path }}.exe
