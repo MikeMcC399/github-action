@@ -8,7 +8,7 @@
   },
   "private": true,
   "devDependencies": {
-    "cypress": "^14.0.3",
-    "cypress-mochawesome-reporter": "^3.8.2"
+    "cypress": "^14.5.1",
+    "cypress-mochawesome-reporter": "^4.0.0"
   }
 }
