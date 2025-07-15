@@ -49,10 +49,10 @@ jobs:
         run: |
           ${{ steps.setup-firefox.outputs.firefox-path }} --version
 
-      - name: Show firefox version Windows
-        if: startsWith(matrix.os, 'windows')
-        run: |
-          ${{ steps.setup-firefox.outputs.firefox-path }}.exe --version
+      # - name: Show firefox version Windows
+      #   if: startsWith(matrix.os, 'windows')
+      #   run: |
+      #     ${{ steps.setup-firefox.outputs.firefox-path }}.exe --version
 
       - name: Cypress test Firefox ${{ matrix.firefox-version }}
         if:  startsWith(matrix.os, 'windows')
