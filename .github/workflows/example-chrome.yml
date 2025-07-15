@@ -11,11 +11,11 @@ jobs:
         os:
           - ubuntu-22.04
           - ubuntu-24.04
-          # - ubuntu-22.04-arm
-          # - ubuntu-24.04-arm
+          - ubuntu-22.04-arm
+          - ubuntu-24.04-arm
           - windows-2022
           - windows-2025
-          - windows-11-arm
+          # - windows-11-arm
         chrome-version:
           - ''
           # - latest
@@ -46,25 +46,15 @@ jobs:
         run: |
           ${{ steps.setup-chrome.outputs.chrome-path }} --version
 
-      - name: Show chrome version Windows
-        if: startsWith(matrix.os, 'windows')
-        run: |
-          ${{ steps.setup-chrome.outputs.chrome-path }} --version
+      # - name: Show chrome version Windows
+      #   if: startsWith(matrix.os, 'windows')
+      #   run: |
+      #     ${{ steps.setup-chrome.outputs.chrome-path }} --version
 
       - name: Cypress test Chrome ${{ matrix.chrome-version }}
-        if:  startsWith(matrix.os, 'windows')
         uses: ./
         timeout-minutes: 5
         with:
           build: npx cypress info
           working-directory: examples/browser
           browser: ${{ steps.setup-chrome.outputs.chrome-path }}
-
-      - name: Cypress test Chrome ${{ matrix.chrome-version }}
-        if: startsWith(matrix.os, 'ubuntu')
-        uses: ./
-        timeout-minutes: 5
-        with:
-            build: npx cypress info
-            working-directory: examples/browser
-            browser: ${{ steps.setup-chrome.outputs.chrome-path }}
