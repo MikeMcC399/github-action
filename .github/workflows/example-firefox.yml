@@ -1,45 +1,20 @@
 name: example-firefox
 on:
-  push:
-    branches:
-      - 'master'
-  pull_request:
   workflow_dispatch:
 
 jobs:
-  # firefox-ubuntu-arm:
-  #   runs-on: ubuntu-24.04-arm
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v4
-  #     - run: node --version
-
-  #     - name: Firefox default browser
-  #       uses: ./
-  #       timeout-minutes: 3
-  #       with:
-  #         build: npx cypress info
-  #         working-directory: examples/browser
-  #         browser: firefox
-
-      # - name: Firefox latest install
-      #   uses: browser-actions/setup-firefox@v1
-
-      # - name: Firefox latest test
-      #   uses: ./
-      #   timeout-minutes: 3
-      #   with:
-      #     install: false
-      #     build: npx cypress info
-      #     working-directory: examples/browser
-      #     browser: firefox
 
   firefox-windows:
     strategy:
       fail-fast: false
       matrix:
         os:
-#          - windows-2025
+          - ubuntu-22.04
+          - ubuntu-24.04
+          - ubuntu-22.04-arm
+          - ubuntu-24.04-arm
+          - windows 2022
+          - windows-2025
           - windows-11-arm
         firefox-version:
           - ''
@@ -52,25 +27,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: show node version
-        run: node --version
-
       - name: Node.js 22 setup
         uses: actions/setup-node@v4
         with:
           node-version: '22'
           check-latest: true
-
-      # - name: show firefox default version
-      #   run: firefox --version
-
-      - name: Cypress test Firefox default
-        uses: ./
-        timeout-minutes: 5
-        with:
-          build: npx cypress info
-          working-directory: examples/browser
-          browser: firefox
 
       - name: Firefox ${{ matrix.firefox-version }}
         id: setup-firefox
@@ -78,15 +39,14 @@ jobs:
         with:
           firefox-version: ${{ matrix.firefox-version }}
 
-      # - run: |
-      #     echo Installed firefox versions: ${{ steps.setup-firefox.outputs.firefox-version }}
-      #     ${{ steps.setup-firefox.outputs.firefox-path }} --version
+      - run: |
+          echo firefox-version ${{ steps.setup-firefox.outputs.firefox-version }}
+          echo firefox-path${{ steps.setup-firefox.outputs.firefox-path }}
 
-      - name: Cypress test Firefox ${{ matrix.firefox-version }}
-        uses: ./
-        timeout-minutes: 5
-        with:
-            install: false
-            build: npx cypress info
-            working-directory: examples/browser
-            browser: ${{ steps.setup-firefox.outputs.firefox-path }}.exe
+      # - name: Cypress test Firefox ${{ matrix.firefox-version }}
+      #   uses: ./
+      #   timeout-minutes: 5
+      #   with:
+      #       build: npx cypress info
+      #       working-directory: examples/browser
+      #       browser: ${{ steps.setup-firefox.outputs.firefox-path }}.exe
