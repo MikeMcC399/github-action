@@ -11,11 +11,11 @@ jobs:
         os:
           - ubuntu-22.04
           - ubuntu-24.04
-          - ubuntu-22.04-arm
-          - ubuntu-24.04-arm
+          # - ubuntu-22.04-arm Support not available from Chrome
+          # - ubuntu-24.04-arm Support not available from Chrome
           - windows-2022
           - windows-2025
-          # - windows-11-arm
+          # - windows-11-arm WIP - Chromium only support at this time
         chrome-version:
           - ''
           # - latest
