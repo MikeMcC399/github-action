@@ -1,38 +1,70 @@
 name: example-chrome
 on:
-  # push:
-  #   branches:
-  #     - 'master'
-  # pull_request:
   workflow_dispatch:
 
 jobs:
-  tests:
-    runs-on: ubuntu-24.04
+
+  chrome-windows:
     strategy:
       fail-fast: false
       matrix:
+        os:
+          - ubuntu-22.04
+          - ubuntu-24.04
+          # - ubuntu-22.04-arm
+          # - ubuntu-24.04-arm
+          - windows-2022
+          - windows-2025
+          - windows-11-arm
         chrome-version:
-          - latest
-          - stable
-          # - beta
-          # - dev
-          # - canary
-          - 137
-          - 137.0.7151.70
+          - ''
+          # - latest
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-        # https://github.com/browser-actions/setup-chrome
-      - name: Install Chrome separately
-        uses: browser-actions/setup-chrome@v1
+      - name: Node.js 22 setup
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          check-latest: true
+
+      - name: Chrome ${{ matrix.chrome-version }}
+        id: setup-chrome
+        uses: browser-actions/setup-chrome@v2
+        timeout-minutes: 5
         with:
           chrome-version: ${{ matrix.chrome-version }}
-          install-dependencies: true
 
-      - name: Cypress
+      - run: |
+          echo "chrome-version: ${{ steps.setup-chrome.outputs.chrome-version }}"
+          echo "chrome-path: ${{ steps.setup-chrome.outputs.chrome-path }}"
+
+      - name: Show chrome version Ubuntu
+        if: startsWith(matrix.os, 'ubuntu')
+        run: |
+          ${{ steps.setup-chrome.outputs.chrome-path }} --version
+
+      - name: Show chrome version Windows
+        if: startsWith(matrix.os, 'windows')
+        run: |
+          ${{ steps.setup-chrome.outputs.chrome-path }} --version
+
+      - name: Cypress test Chrome ${{ matrix.chrome-version }}
+        if:  startsWith(matrix.os, 'windows')
         uses: ./
+        timeout-minutes: 5
         with:
-          command: npx cypress info
+          build: npx cypress info
           working-directory: examples/browser
+          browser: ${{ steps.setup-chrome.outputs.chrome-path }}
+
+      - name: Cypress test Chrome ${{ matrix.chrome-version }}
+        if: startsWith(matrix.os, 'ubuntu')
+        uses: ./
+        timeout-minutes: 5
+        with:
+            build: npx cypress info
+            working-directory: examples/browser
+            browser: ${{ steps.setup-chrome.outputs.chrome-path }}
