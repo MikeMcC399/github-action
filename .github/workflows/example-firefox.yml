@@ -40,8 +40,8 @@ jobs:
           firefox-version: ${{ matrix.firefox-version }}
 
       - run: |
-          echo firefox-version ${{ steps.setup-firefox.outputs.firefox-version }}
-          echo firefox-path${{ steps.setup-firefox.outputs.firefox-path }}
+          echo firefox-version: ${{ steps.setup-firefox.outputs.firefox-version }}
+          echo firefox-path: ${{ steps.setup-firefox.outputs.firefox-path }}
 
       # - name: Cypress test Firefox ${{ matrix.firefox-version }}
       #   uses: ./
