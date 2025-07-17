@@ -29,6 +29,6 @@ jobs:
       - name: Custom Yarn command
         uses: ./
         with:
-          working-directory: examples/yarn-modern
+          project: examples/yarn-modern
           # https://yarnpkg.com/cli/install
           install-command: yarn install

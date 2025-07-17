@@ -29,7 +29,7 @@ jobs:
       - name: Custom Yarn command
         uses: ./
         with:
-          working-directory: examples/yarn-modern-pnp
+          project: examples/yarn-modern-pnp
           # https://yarnpkg.com/cli/install
           install-command: yarn install
           command: yarn run --binaries-only cypress run
