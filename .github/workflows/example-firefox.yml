@@ -55,19 +55,9 @@ jobs:
       #     ${{ steps.setup-firefox.outputs.firefox-path }} --version
 
       - name: Cypress test Firefox ${{ matrix.firefox-version }}
-        if:  startsWith(matrix.os, 'windows')
         uses: ./
         timeout-minutes: 5
         with:
           build: npx cypress info
           working-directory: examples/browser
           browser: ${{ steps.setup-firefox.outputs.firefox-path }}
-
-      - name: Cypress test Firefox ${{ matrix.firefox-version }}
-        if: startsWith(matrix.os, 'ubuntu')
-        uses: ./
-        timeout-minutes: 5
-        with:
-            build: npx cypress info
-            working-directory: examples/browser
-            browser: ${{ steps.setup-firefox.outputs.firefox-path }}
