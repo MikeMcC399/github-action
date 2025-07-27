@@ -11,8 +11,8 @@ jobs:
         os:
           - ubuntu-22.04
           - ubuntu-24.04
-          # - ubuntu-22.04-arm
-          # - ubuntu-24.04-arm
+          - ubuntu-22.04-arm
+          - ubuntu-24.04-arm
           - windows-2022
           - windows-2025
           - windows-11-arm
@@ -52,7 +52,7 @@ jobs:
       # - name: Show firefox version Windows
       #   if: startsWith(matrix.os, 'windows')
       #   run: |
-      #     ${{ steps.setup-firefox.outputs.firefox-path }}.exe --version
+      #     ${{ steps.setup-firefox.outputs.firefox-path }} --version
 
       - name: Cypress test Firefox ${{ matrix.firefox-version }}
         if:  startsWith(matrix.os, 'windows')
@@ -61,7 +61,7 @@ jobs:
         with:
           build: npx cypress info
           working-directory: examples/browser
-          browser: ${{ steps.setup-firefox.outputs.firefox-path }}.exe
+          browser: ${{ steps.setup-firefox.outputs.firefox-path }}
 
       - name: Cypress test Firefox ${{ matrix.firefox-version }}
         if: startsWith(matrix.os, 'ubuntu')
