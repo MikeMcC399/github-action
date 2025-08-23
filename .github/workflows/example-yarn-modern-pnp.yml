@@ -12,20 +12,24 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - run: corepack --version
       - name: Enable Corepack # see https://yarnpkg.com/getting-started/install
         run: |
           npm install -g corepack
           corepack enable yarn
+      - run: corepack --version
       - name: Set up Yarn cache
         uses: actions/setup-node@v4
         with:
           node-version-file: '.node-version'
           cache: yarn
           cache-dependency-path: examples/yarn-modern-pnp/yarn.lock
+      - run: corepack --version
       - name: Reinstall Corepack # actions/setup-node may have replaced Corepack with an older version
         run: |
           npm install -g corepack
           corepack enable yarn
+      - run: corepack --version
       - name: Custom Yarn command
         uses: ./
         with:
