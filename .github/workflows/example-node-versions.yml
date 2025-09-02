@@ -11,13 +11,17 @@ permissions:
 jobs:
   cypress-run:
     runs-on: ubuntu-24.04
+    timeout-minutes: 10
     # let's make sure Cypress works on several versions of Node
     strategy:
       fail-fast: false
       matrix:
         node:
+          - 22.0.0
           - 22
+          - 24.0.0
           - 24
+          - 26.0.0
           - 26
           - latest
     name: Cypress E2E on Node.js ${{ matrix.node }}
@@ -29,6 +33,7 @@ jobs:
         uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node }}
+          check-latest: true
       - if: matrix.node == 'latest'
         # test with bundled version of npm, except for with Node.js latest
         run: npm install -g npm@latest
