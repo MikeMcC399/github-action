@@ -41,7 +41,7 @@ jobs:
       fail-fast: false
       matrix:
         # run copies of the current job in parallel
-        chrome-version: [139, 140]
+        chrome-version: [140.0.7339.80, 140.0.7339.81]
     if: needs.check-record-key.outputs.record-key-exists == 'true'
     steps:
       - name: Checkout
