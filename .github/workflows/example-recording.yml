@@ -47,6 +47,10 @@ jobs:
       matrix:
         # run copies of the current job in parallel
         containers: [1, 2]
+    # Use Cypress Docker image for consistent Chrome browser version in each parallel job invocation
+    container:
+      image: cypress/browsers:22.19.0
+      options: --user 1001
     if: needs.check-record-key.outputs.record-key-exists == 'true'
     steps:
       - name: Checkout
@@ -63,6 +67,7 @@ jobs:
           parallel: true
           group: Recording example
           tag: action
+          browser: chrome
 
       # see "outcome" and "conclusion" of a step doc
       # https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#steps-context
