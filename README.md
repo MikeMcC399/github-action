@@ -742,6 +742,9 @@ jobs:
       matrix:
         # run 3 copies of the current job in parallel
         containers: [1, 2, 3]
+    container:
+      image: cypress/browsers:22.19.0
+      options: --user 1001
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -754,6 +757,7 @@ jobs:
           record: true
           parallel: true
           group: 'Actions example'
+          browser: chrome
         env:
           # pass the Cypress Cloud record key as an environment variable
           CYPRESS_RECORD_KEY: ${{ secrets.EXAMPLE_RECORDING_KEY }}
@@ -773,7 +777,13 @@ To optimize runs when there are failing tests present, refer to optional [Cypres
 - [Spec Prioritization](https://docs.cypress.io/cloud/features/smart-orchestration/spec-prioritization)
 - [Auto Cancellation](https://docs.cypress.io/guides/cloud/smart-orchestration/run-cancellation). See also [Auto cancel after failures](#auto-cancel-after-failures) for details of how to set this option in a Cypress GitHub Action workflow.
 
-During staged rollout of a new GitHub-hosted runner version, GitHub may provide a mixture of current and new image versions used by the container matrix. It is recommended to use a [Docker image](#docker-image) in the parallel job run which avoids any Cypress Cloud errors due to browser major version mismatch from the two different image versions. A [Docker image](#docker-image) is not necessary if testing against the default built-in Electron browser because this browser version is fixed by the Cypress version in use and it is unaffected by any GitHub runner image rollout.
+During staged rollout of a new GitHub-hosted runner image version, GitHub may provide a mixture of current and new image versions used by the container matrix. It is recommended to use a `cypress/browsers` [Docker image](#docker-image) in the parallel job run which avoids any Cypress Cloud errors due to browser major version mismatch from the two different image versions. See example above.
+
+A Docker image is not necessary if testing against the default built-in Electron browser because this browser version is fixed by the Cypress version in use and it is unaffected by any GitHub runner image rollout.
+
+As an alternative to using a `cypress/browsers` Docker image, you can install fixed non-Electron browser versions using GitHub [browser-actions](https://github.com/browser-actions) such as described in the [Chrome for Testing](#chrome-for-testing) documentation section.
+
+[![recording example](https://github.com/cypress-io/github-action/actions/workflows/example-recording.yml/badge.svg)](.github/workflows/example-recording.yml)
 
 ### Component and E2E Testing
 
