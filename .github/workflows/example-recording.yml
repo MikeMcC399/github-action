@@ -41,49 +41,29 @@ jobs:
       fail-fast: false
       matrix:
         # run copies of the current job in parallel
-        containers: [1, 2]
+        chrome-version: [139, 140]
     if: needs.check-record-key.outputs.record-key-exists == 'true'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Chrome ${{ matrix.chrome-version }}
+        id: setup-chrome
+        uses: browser-actions/setup-chrome@v2 # https://github.com/browser-actions/setup-chrome
+        timeout-minutes: 5
+        with:
+          chrome-version: ${{ matrix.chrome-version }}
+
       - name: Cypress tests
-        # normally you would write
-        # uses: cypress-io/github-action@v6
         uses: ./
         # let's give this action an ID so we can refer
         # to its output values later
         id: cypress
         with:
           working-directory: examples/recording
+          build: npx cypress info
           record: true
           parallel: true
           group: Recording example
           tag: action
-
-      # see "outcome" and "conclusion" of a step doc
-      # https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#steps-context
-      # "output" can be success, failure, cancelled, or skipped
-      - name: Print Cypress Cloud URL
-        if: always()
-        run: |
-          echo Cypress finished with: ${{ steps.cypress.outcome }}
-          echo See results at ${{ steps.cypress.outputs.resultsUrl }}
-
-  group:
-    runs-on: ubuntu-24.04
-    needs: [check-record-key]
-    if: needs.check-record-key.outputs.record-key-exists == 'true'
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Cypress tests
-        # normally you would write
-        # uses: cypress-io/github-action@v6
-        uses: ./
-        with:
-          working-directory: examples/recording
-          record: true
-          # no parallel flag, just the group name
-          group: Recording group
+          browser: ${{ steps.setup-chrome.outputs.chrome-path }}
