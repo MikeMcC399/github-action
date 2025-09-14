@@ -72,8 +72,8 @@ jobs:
         id: setup-chrome
         # see https://github.com/browser-actions/setup-chrome
         uses: browser-actions/setup-chrome@v2
-        with:
-          chrome-version: stable
+        # with:
+        #   chrome-version: stable
 
       - name: Chrome stable
         uses: ./
