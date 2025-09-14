@@ -1,4 +1,9 @@
 name: example-edge
+# In the example jobs, the action is called with
+# uses: ./
+# which runs the action code from the current branch.
+# If you copy this workflow to another repo, replace the line with
+# uses: cypress-io/github-action@v6
 on:
   push:
     branches:
@@ -7,14 +12,14 @@ on:
   workflow_dispatch:
 
 jobs:
-  tests:
+  edge:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Cypress info
-        uses: ./ # if copying, replace with cypress-io/github-action@v6
+      - name: Edge
+        uses: ./
         with:
           # just for full picture after installing Cypress
           # print information about detected browsers, etc
@@ -22,3 +27,22 @@ jobs:
           build: npm run info
           working-directory: examples/browser
           browser: edge
+
+  edge-stable:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Edge stable
+        id: setup-edge
+        # see https://github.com/browser-actions/setup-edge
+        uses: browser-actions/setup-edge@v1
+        with:
+          edge-version: stable
+
+      - name: Edge stable
+        uses: ./
+        with:
+          working-directory: examples/browser
+          browser: ${{ steps.setup-edge.outputs.edge-path }}
