@@ -9,16 +9,21 @@ jobs:
       fail-fast: false
       matrix:
         os:
-          - ubuntu-22.04
+          # - ubuntu-22.04
           - ubuntu-24.04
           # - ubuntu-22.04-arm Support not available from Chrome
           # - ubuntu-24.04-arm Support not available from Chrome
-          - windows-2022
-          - windows-2025
+          # - windows-2022
+          # - windows-2025
           # - windows-11-arm WIP - Chromium only support at this time
         chrome-version:
           - ''
-          # - latest
+          - latest
+          - stable
+          - beta
+          - dev
+          - canary
+          - 140
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
@@ -32,7 +37,7 @@ jobs:
 
       - name: Chrome ${{ matrix.chrome-version }}
         id: setup-chrome
-        uses: browser-actions/setup-chrome@v2
+        uses: browser-actions/setup-chrome@v2 # https://github.com/browser-actions/setup-chrome
         timeout-minutes: 5
         with:
           chrome-version: ${{ matrix.chrome-version }}
