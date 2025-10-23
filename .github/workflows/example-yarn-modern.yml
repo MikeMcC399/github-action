@@ -9,6 +9,12 @@ on:
 jobs:
   yarn-modern:
     runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        node:
+          - 24
+          - 25
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -19,7 +25,7 @@ jobs:
       - name: Set up Yarn cache
         uses: actions/setup-node@v4
         with:
-          node-version-file: '.node-version'
+          node-version: ${{ matrix.node }}
           cache: yarn
           cache-dependency-path: examples/yarn-modern/yarn.lock
       - name: Reinstall Corepack # actions/setup-node may have replaced Corepack with an older version
