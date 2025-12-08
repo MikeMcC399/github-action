@@ -29,7 +29,7 @@ jobs:
   #         # see https://on.cypress.io/command-line#cypress-info
   #         build: npx cypress info
 
-  basic-separate-pm-cache:
+  basic-npm-cache:
     strategy:
       fail-fast: false
       matrix:
