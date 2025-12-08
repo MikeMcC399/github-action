@@ -68,6 +68,7 @@ The following examples demonstrate the actions' functions.
 - Use [Yarn Modern](#yarn-modern)
 - Use [Yarn Plug'n'Play](#yarn-plugnplay)
 - Use [Yarn workspaces](#yarn-workspaces)
+- Disable [package manager cache](#package-manager-cache-disable)
 - Use [custom cache key](#custom-cache-key)
 - Run tests on multiple [Node versions](#node-versions)
 - Split [install and tests](#split-install-and-tests) into separate jobs
@@ -566,14 +567,14 @@ jobs:
         node: [20, 22, 24, 25]
     name: E2E on Node v${{ matrix.node }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
       - run: node -v
-
-      - name: Checkout
-        uses: actions/checkout@v6
 
       - name: Cypress run
         uses: cypress-io/github-action@v6
@@ -1329,6 +1330,38 @@ jobs:
 
 [![Yarn workspaces example](https://github.com/cypress-io/github-action/actions/workflows/example-start-and-yarn-workspaces.yml/badge.svg)](.github/workflows/example-start-and-yarn-workspaces.yml)
 
+### Package manager cache disable
+
+When the action installs dependencies,
+it caches the package manager cache from npm or from Yarn v1 Classic by default,
+based on the [lockfile](#package-manager-cache) it discovers.
+If package manager caching is implemented separately from the action,
+for example to work with Yarn Modern or pnpm,
+then disable the actions' package manager caching by setting the option
+`package-manager-cache` to `false`.
+
+GitHub's [actions/setup-node](https://github.com/actions/setup-node/blob/main/README.md) offers a convenient way to install a chosen version of Node.js
+and to set up caching of package manager caches in one step.
+
+```yml
+name: Package manager caching
+on: push
+jobs:
+  cypress-run:
+    runs-on: ubuntu-24.04
+    name:
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts
+          cache: 'pnpm'
+          cache-dependency-path: pnpm-lock.yaml
+      - uses: cypress-io/github-action@v6
+        with:
+          package-manager-cache: false
+```
+
 ### Custom cache key
 
 Sometimes the default cache key does not work. For example, if you cannot share the Node modules across Node versions due to native extensions. In that case pass your own `cache-key` parameter.
@@ -1345,12 +1378,12 @@ jobs:
         node: [20, 22, 24, 25]
     name: E2E on Node v${{ matrix.node }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@v6
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
-      - name: Checkout
-        uses: actions/checkout@v6
       # run Cypress tests and record them under the same run
       # associated with commit SHA and just give a different group name
       - name: Cypress run
@@ -1379,10 +1412,10 @@ jobs:
         node: [20, 22, 24, 25]
     name: E2E on Node v${{ matrix.node }}
     steps:
+      - uses: actions/checkout@v6
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
-      - uses: actions/checkout@v6
       - uses: cypress-io/github-action@v6
 ```
 

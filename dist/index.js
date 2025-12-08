@@ -102743,8 +102743,16 @@ const installMaybe = () => {
     return Promise.resolve()
   }
 
+  const packageManagerCacheEnabled = getInputBool(
+    'package-manager-cache',
+    true
+  )
+  const npmCachePromise = packageManagerCacheEnabled
+    ? restoreCachedNpm()
+    : Promise.resolve(false)
+
   return Promise.all([
-    restoreCachedNpm(),
+    npmCachePromise,
     restoreCachedCypressBinary()
   ]).then(([npmCacheHit, cypressCacheHit]) => {
     debug(`npm cache hit ${npmCacheHit}`)
@@ -102759,8 +102767,11 @@ const installMaybe = () => {
         }
 
         debug('verifying Cypress binary')
+        const saveNpmPromise = packageManagerCacheEnabled
+          ? saveCachedNpm()
+          : Promise.resolve(undefined)
         return verifyCypressBinary()
-          .then(saveCachedNpm)
+          .then(() => saveNpmPromise)
           .then(saveCachedCypressBinary)
       })
     })
