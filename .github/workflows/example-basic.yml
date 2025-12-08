@@ -8,23 +8,53 @@ on:
   workflow_dispatch:
 
 jobs:
-  basic:
+  # basic:
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       os: [ubuntu-22.04, ubuntu-24.04, windows-2025, macos-15]
+  #   runs-on: ${{ matrix.os }}
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v6
+
+  #     - name: Cypress tests
+  #       uses: ./ # if copying, replace with cypress-io/github-action@v6
+  #       # the parameters below are only necessary
+  #       # because we are running these examples in a monorepo
+  #       with:
+  #         working-directory: examples/basic
+  #         # just for full picture after installing Cypress
+  #         # print information about detected browsers, etc
+  #         # see https://on.cypress.io/command-line#cypress-info
+  #         build: npx cypress info
+
+  basic-separate-pm-cache:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-22.04, ubuntu-24.04, windows-2025, macos-15]
+        os: 
+          # - ubuntu-22.04
+          - ubuntu-24.04
+          # - windows-2025
+          # - macos-15
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .node-version
+          cache: 'npm'
+          cache-dependency-path: examples/basic/package-lock.json
+      - run: npm ci
+        working-directory: examples/basic
 
       - name: Cypress tests
-        uses: ./ # if copying, replace with cypress-io/github-action@v6
-        # the parameters below are only necessary
-        # because we are running these examples in a monorepo
+        uses: ./ 
         with:
+          install: false
+          package-manager-cache: true 
           working-directory: examples/basic
-          # just for full picture after installing Cypress
-          # print information about detected browsers, etc
-          # see https://on.cypress.io/command-line#cypress-info
-          build: npx cypress info
+          build: npx cypress info          
