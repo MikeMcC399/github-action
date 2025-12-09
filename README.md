@@ -68,6 +68,7 @@ The following examples demonstrate the actions' functions.
 - Use [Yarn Modern](#yarn-modern)
 - Use [Yarn Plug'n'Play](#yarn-plugnplay)
 - Use [Yarn workspaces](#yarn-workspaces)
+- Disable [package manager cache](#package-manager-cache-disable)
 - Use [custom cache key](#custom-cache-key)
 - Run tests on multiple [Node versions](#node-versions)
 - Split [install and tests](#split-install-and-tests) into separate jobs
@@ -1328,6 +1329,38 @@ jobs:
 ```
 
 [![Yarn workspaces example](https://github.com/cypress-io/github-action/actions/workflows/example-start-and-yarn-workspaces.yml/badge.svg)](.github/workflows/example-start-and-yarn-workspaces.yml)
+
+### Package manager cache disable
+
+When the action installs dependencies,
+it caches the package manager cache from npm or from Yarn v1 Classic by default,
+based on the [lockfile](#package-manager-cache) it discovers.
+If package manager caching is implemented separately from the action,
+for example to work with Yarn Modern or pnpm,
+then disable the actions' package manager caching by setting the option 
+`package-manager-cache` to `false`.
+
+GitHub's [actions/setup-node](https://github.com/actions/setup-node/blob/main/README.md) offers a convenient way to install a chosen version of Node.js
+and to set up caching of package manager caches in one step.
+
+```yml
+name: Package manager caching
+on: push
+jobs:
+  cypress-run:
+    runs-on: ubuntu-24.04
+    name: 
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts
+          cache: 'pnpm'
+          cache-dependency-path: pnpm-lock.yaml
+      - uses: cypress-io/github-action@v6
+        with:
+          package-manager-cache: false
+```
 
 ### Custom cache key
 
