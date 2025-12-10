@@ -567,14 +567,14 @@ jobs:
         node: [20, 22, 24, 25]
     name: E2E on Node v${{ matrix.node }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
       - run: node -v
-
-      - name: Checkout
-        uses: actions/checkout@v6
 
       - name: Cypress run
         uses: cypress-io/github-action@v6
@@ -1378,12 +1378,12 @@ jobs:
         node: [20, 22, 24, 25]
     name: E2E on Node v${{ matrix.node }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@v6
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
-      - name: Checkout
-        uses: actions/checkout@v6
       # run Cypress tests and record them under the same run
       # associated with commit SHA and just give a different group name
       - name: Cypress run
@@ -1412,10 +1412,10 @@ jobs:
         node: [20, 22, 24, 25]
     name: E2E on Node v${{ matrix.node }}
     steps:
+      - uses: actions/checkout@v6
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
-      - uses: actions/checkout@v6
       - uses: cypress-io/github-action@v6
 ```
 
