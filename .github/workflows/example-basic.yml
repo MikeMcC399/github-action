@@ -40,7 +40,7 @@ jobs:
           build: npx cypress info
 
   basic-npm-cache:
-    # Use setup--node to cache npm dependencies
+    # Use setup-node to cache npm dependencies
     strategy:
       fail-fast: false
       matrix:
