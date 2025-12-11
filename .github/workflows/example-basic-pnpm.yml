@@ -37,6 +37,7 @@ jobs:
       - name: Cypress tests
         uses: ./ # if copying, replace with cypress-io/github-action@v6
         with:
+          package-manager-cache: false
           working-directory: examples/basic-pnpm
           # print information about detected browsers, etc
           # see https://on.cypress.io/command-line#cypress-info
