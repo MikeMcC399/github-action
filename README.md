@@ -101,7 +101,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-      # Install npm dependencies, cache them correctly
+      # Install dependencies with caching
       # and run all Cypress tests
       - name: Cypress run
         uses: cypress-io/github-action@v6
@@ -664,7 +664,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-      # Install npm dependencies, cache them correctly
+      # Install dependencies with caching
       # and run all Cypress tests with `quiet` parameter
       - name: Cypress run
         uses: cypress-io/github-action@v6
@@ -1168,9 +1168,14 @@ jobs:
 
 ### pnpm
 
-The package manager `pnpm` is not pre-installed in [GitHub Actions runner images](https://github.com/actions/runner-images) (unlike `npm` and `yarn`) and so it must be installed in a separate workflow step (see below). If the action finds a `pnpm-lock.yaml` file, it uses the [pnpm](https://pnpm.io/cli/install) command `pnpm install --frozen-lockfile` by default to install dependencies.
+The package manager `pnpm` is not pre-installed in [GitHub Actions runner images](https://github.com/actions/runner-images)
+(unlike npm and Yarn Classic) and so it must be installed in a separate workflow step (see below).
+If the action finds a `pnpm-lock.yaml` file, it uses the [pnpm](https://pnpm.io/cli/install) command `pnpm install --frozen-lockfile` by default to install dependencies.
 
-The example below follows [pnpm recommendations](https://pnpm.io/continuous-integration#github-actions) for installing pnpm and caching the [pnpm store](https://pnpm.io/cli/store). Follow the [Cypress pnpm configuration instructions](https://docs.cypress.io/app/get-started/install-cypress#pnpm-configuration) and apply them to your project, to enable pnpm to install the Cypress binary.
+The example below follows [pnpm recommendations](https://pnpm.io/continuous-integration#github-actions) for installing pnpm and caching the
+[pnpm store](https://pnpm.io/cli/store).
+Follow the [Cypress pnpm configuration instructions](https://docs.cypress.io/app/get-started/install-cypress#pnpm-configuration)
+and apply them to your project, to enable pnpm to install the Cypress binary.
 
 ```yaml
 name: example-basic-pnpm
@@ -1188,12 +1193,13 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 24
           cache: 'pnpm'
           cache-dependency-path: examples/basic-pnpm/pnpm-lock.yaml
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
+          package-manager-cache: false
           working-directory: examples/basic-pnpm
 ```
 
@@ -1201,13 +1207,19 @@ jobs:
 
 ### pnpm workspaces
 
-The action does not directly support using [pnpm workspaces](https://pnpm.io/workspaces) (see feature request [#1144](https://github.com/cypress-io/github-action/issues/1144)). As a workaround, you can install dependencies and run Cypress tests in a workspace in separate steps. The snippet below shows this principle.
+The action does not directly support using [pnpm workspaces](https://pnpm.io/workspaces)
+(see feature request [#1144](https://github.com/cypress-io/github-action/issues/1144)).
+As a workaround, you can install dependencies and run Cypress tests in a workspace in separate steps.
+The snippet below shows this principle.
 
 ```yml
       ...
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-        working-directory: examples/start-and-pnpm-workspaces
+        uses: cypress-io/github-action@v6
+        with:
+          package-manager-cache: false
+          test: false
+          working-directory: examples/start-and-pnpm-workspaces
 
       - name: Cypress test
         uses: cypress-io/github-action@v6
@@ -1333,7 +1345,7 @@ jobs:
 ### Package manager cache disable
 
 When the action installs dependencies,
-it caches the package manager cache from npm or from Yarn v1 Classic by default,
+it caches the package manager cache from npm or from Yarn 1 (Classic) by default,
 based on the [lockfile](#package-manager-cache) it discovers.
 If package manager caching is implemented separately from the action,
 for example to work with Yarn Modern or pnpm,
