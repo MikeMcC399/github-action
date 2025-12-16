@@ -56,6 +56,8 @@ jobs:
   #   steps:
   #     - name: Checkout
   #       uses: actions/checkout@v6
+  #       with:
+  #         ref: v5
   #     - name: Cypress tests
   #       uses: cypress-io/github-action@v1.25.3
   #       env:
@@ -69,6 +71,8 @@ jobs:
   #   steps:
   #     - name: Checkout
   #       uses: actions/checkout@v6
+  #       with:
+  #         ref: v5
   #     - name: Cypress tests
   #       uses: cypress-io/github-action@v2
   #       with:
@@ -80,6 +84,8 @@ jobs:
   #   steps:
   #     - name: Checkout
   #       uses: actions/checkout@v6
+  #       with:
+  #         ref: v5
   #     - name: Cypress tests
   #       uses: cypress-io/github-action@v3
   #       with:
