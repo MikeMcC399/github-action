@@ -1337,7 +1337,7 @@ it caches the package manager cache from npm or from Yarn v1 Classic by default,
 based on the [lockfile](#package-manager-cache) it discovers.
 If package manager caching is implemented separately from the action,
 for example to work with Yarn Modern or pnpm,
-then disable the actions' package manager caching by setting the option
+then disable the actions' package manager caching by setting the parameter
 `package-manager-cache` to `false`.
 
 GitHub's [actions/setup-node](https://github.com/actions/setup-node/blob/main/README.md) offers a convenient way to install a chosen version of Node.js
