@@ -13,6 +13,9 @@ on:
   pull_request:
   workflow_dispatch:
 
+env:
+  NO_COLOR: 1
+
 jobs:
   basic:
     strategy:
