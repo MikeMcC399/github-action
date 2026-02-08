@@ -8,6 +8,6 @@
   },
   "private": true,
   "devDependencies": {
-    "cypress": "https://cdn.cypress.io/beta/npm/15.10.1/linux-x64/develop-877cad268c9bc1638a30b071f76b8469c5ce48af/cypress.tgz"
+    "cypress": "https://cdn.cypress.io/beta/npm/15.10.1/darwin-x64/develop-877cad268c9bc1638a30b071f76b8469c5ce48af/cypress.tgz"
   }
 }
