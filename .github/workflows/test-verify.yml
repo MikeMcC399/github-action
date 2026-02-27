@@ -1,0 +1,17 @@
+name: Test verify
+
+on:
+  workflow_dispatch:
+
+defaults:
+  run:
+    working-directory: examples/basic
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - run: npm ci
+      - run: npx cypress verify
