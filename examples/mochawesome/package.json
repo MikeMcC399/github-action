@@ -1,0 +1,14 @@
+{
+  "name": "example-mochawesome",
+  "version": "1.0.0",
+  "description": "basic example how to run Cypress tests",
+  "main": "index.js",
+  "scripts": {
+    "test": "cypress run"
+  },
+  "private": true,
+  "devDependencies": {
+    "cypress": "^15.11.0",
+    "cypress-mochawesome-reporter": "^4.0.2"
+  }
+}
