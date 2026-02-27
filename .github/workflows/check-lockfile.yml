@@ -1,0 +1,9 @@
+name: check-lockfile
+on: workflow_dispatch
+jobs:
+  check-lockfile:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - run: npm ci
