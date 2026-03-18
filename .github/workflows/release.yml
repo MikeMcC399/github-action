@@ -6,28 +6,31 @@ jobs:
   release:
     runs-on: ubuntu-24.04
     name: release
-    # only release from the master branch
-    if: github.ref == 'refs/heads/master'
+    # # only release from the master branch
+    # if: github.ref == 'refs/heads/master'
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-      - uses: bahmutov/npm-install@v1
-      # https://github.com/cycjimmy/semantic-release-action
+        uses: actions/checkout@v6
+      - name: Install Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24.14.0
+      - run: npm ci
       - name: Semantic Release
-        uses: cycjimmy/semantic-release-action@v3
+        uses: cycjimmy/semantic-release-action@v6
         id: semantic
         with:
           dry_run: true
-          branch: master
+          branches: prime
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Push updates to branch for major version
-        # if there is a new version published, let's say v1.2.3
-        # then this step will update branch "v1" to this commit
-        # https://github.com/cypress-io/github-action/branches
-        if: steps.semantic.outputs.new_release_published == 'true'
-        run: 'git push https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git HEAD:refs/heads/v${{steps.semantic.outputs.new_release_major_version}}'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Push updates to branch for major version
+      #   # if there is a new version published, let's say v1.2.3
+      #   # then this step will update branch "v1" to this commit
+      #   # https://github.com/cypress-io/github-action/branches
+      #   if: steps.semantic.outputs.new_release_published == 'true'
+      #   run: 'git push https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git HEAD:refs/heads/v${{steps.semantic.outputs.new_release_major_version}}'
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
