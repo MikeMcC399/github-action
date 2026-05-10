@@ -9,14 +9,8 @@ on:
 jobs:
   docker-browsers:
     runs-on: ubuntu-24.04
-    strategy:
-      fail-fast: false
-      matrix:
-        browser: [chrome, edge, electron, firefox]
-    # Cypress Docker image documentation on https://github.com/cypress-io/cypress-docker-images
-    # Available cypress/browsers tags listed on https://hub.docker.com/r/cypress/browsers/tags
     container:
-      image: cypress/browsers:24.15.0
+      image: node:26.1.0-trixie
       options: --user 1001
     steps:
       - name: Checkout
@@ -25,4 +19,3 @@ jobs:
         uses: ./ # if copying, replace with cypress-io/github-action@v7
         with:
           working-directory: examples/basic
-          browser: ${{ matrix.browser }}
