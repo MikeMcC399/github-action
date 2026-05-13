@@ -3,3 +3,6 @@ packages:
 allowBuilds:
   cypress: true
 sideEffectsCache: false
+minimumReleaseAge: 1440
+minimumReleaseAgeExclude:
+- cypress
