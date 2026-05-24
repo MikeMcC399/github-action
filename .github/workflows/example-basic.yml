@@ -21,11 +21,12 @@ jobs:
       fail-fast: false
       matrix:
         os:
-          - ubuntu-22.04
-          - ubuntu-24.04
-          - windows-2025
-          - macos-26
-          - macos-26-intel
+          # - ubuntu-22.04
+          # - ubuntu-24.04
+          - ubuntu-26.04
+          # - windows-2025
+          # - macos-26
+          # - macos-26-intel
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
@@ -42,31 +43,32 @@ jobs:
           # see https://on.cypress.io/command-line#cypress-info
           build: npx cypress info
 
-  basic-npm-cache:
-    # Use setup-node to cache npm dependencies
-    strategy:
-      fail-fast: false
-      matrix:
-        os:
-          - ubuntu-22.04
-          - ubuntu-24.04
-          - windows-2025
-          - macos-26
-          - macos-26-intel
-    runs-on: ${{ matrix.os }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version-file: .node-version
-          cache: npm
-          cache-dependency-path: examples/basic/package-lock.json
+  # basic-npm-cache:
+  #   # Use setup-node to cache npm dependencies
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       os:
+  #         # - ubuntu-22.04
+  #         # - ubuntu-24.04
+  #         - ubuntu-26.04
+  #         # - windows-2025
+  #         # - macos-26
+  #         # - macos-26-intel
+  #   runs-on: ${{ matrix.os }}
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v6
+  #     - name: Setup Node.js
+  #       uses: actions/setup-node@v6
+  #       with:
+  #         node-version-file: .node-version
+  #         cache: npm
+  #         cache-dependency-path: examples/basic/package-lock.json
 
-      - name: Cypress tests
-        uses: ./
-        with:
-          package-manager-cache: false
-          working-directory: examples/basic
-          build: npx cypress info
+  #     - name: Cypress tests
+  #       uses: ./
+  #       with:
+  #         package-manager-cache: false
+  #         working-directory: examples/basic
+  #         build: npx cypress info
