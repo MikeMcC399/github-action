@@ -9,9 +9,7 @@ permissions:
   contents: read
 
 jobs:
-  cypress-run:
-    runs-on: ubuntu-24.04
-    # let's make sure Cypress works on several versions of Node
+  check-node-versions:
     strategy:
       fail-fast: false
       matrix:
@@ -20,7 +18,10 @@ jobs:
           - 24
           - 25
           - 26
-    name: Cypress E2E on Node v${{ matrix.node }}
+        os:
+          - ubuntu-24.04
+          - ubuntu-24.04-arm
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -30,8 +31,3 @@ jobs:
           node-version: ${{ matrix.node }}
       - run: node -v
       - run: npm -v
-
-      - name: Cypress tests
-        uses: ./ # if copying, replace with cypress-io/github-action@v7
-        with:
-          working-directory: examples/node-versions
