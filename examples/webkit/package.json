@@ -14,7 +14,7 @@
   },
   "private": true,
   "devDependencies": {
-    "cypress": "^15.6.0",
-    "playwright-webkit": "^1.56.1"
+    "cypress": "^15.16.0",
+    "playwright-webkit": "1.60"
   }
 }
