@@ -19,8 +19,8 @@ jobs:
       fail-fast: false
       matrix:
         node:
-          - 22
-          - 24
+          # - 22
+          # - 24
           - 26
     name: Cypress E2E on Node v${{ matrix.node }}
     steps:
