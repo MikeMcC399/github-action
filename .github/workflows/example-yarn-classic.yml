@@ -13,6 +13,9 @@ on:
 permissions:
   contents: read
 
+env:
+  DEBUG: '@cypress/github-action'
+
 jobs:
   yarn-classic:
     runs-on: ubuntu-24.04
