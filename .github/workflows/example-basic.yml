@@ -20,16 +20,27 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os:
-          - ubuntu-22.04
-          - ubuntu-22.04-arm
-          - ubuntu-24.04
-          - ubuntu-24.04-arm
-          - ubuntu-26.04
-          - windows-2025
-          - windows-11-arm
-          - macos-26
-          - macos-26-intel
+        include:
+          - os: ubuntu-22.04
+            browser: chrome
+          - os: ubuntu-22.04-arm
+            browser: firefox
+          - os: ubuntu-24.04
+            browser: chrome
+          - os: ubuntu-24.04
+            browser: electron
+          - os: ubuntu-24.04-arm
+            browser: firefox
+          - os: ubuntu-26.04
+            browser: chrome
+          - os: windows-2025
+            browser: chrome
+          - os: windows-11-arm
+            browser: chrome
+          - os: macos-26
+            browser: chrome
+          - os: macos-26-intel
+            browser: chrome
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
@@ -41,6 +52,7 @@ jobs:
         # because we are running these examples in a monorepo
         with:
           working-directory: examples/basic
+          browser: ${{ matrix.browser }}
           # just for full picture after installing Cypress
           # print information about detected browsers, etc
           # see https://on.cypress.io/command-line#cypress-info
@@ -51,16 +63,27 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os:
-          - ubuntu-22.04
-          - ubuntu-22.04-arm
-          - ubuntu-24.04
-          - ubuntu-24.04-arm
-          - ubuntu-26.04
-          - windows-2025
-          - windows-11-arm
-          - macos-26
-          - macos-26-intel
+        include:
+          - os: ubuntu-22.04
+            browser: chrome
+          - os: ubuntu-22.04-arm
+            browser: firefox
+          - os: ubuntu-24.04
+            browser: chrome
+          - os: ubuntu-24.04
+            browser: electron
+          - os: ubuntu-24.04-arm
+            browser: firefox
+          - os: ubuntu-26.04
+            browser: chrome
+          - os: windows-2025
+            browser: chrome
+          - os: windows-11-arm
+            browser: chrome
+          - os: macos-26
+            browser: chrome
+          - os: macos-26-intel
+            browser: chrome
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
@@ -77,4 +100,5 @@ jobs:
         with:
           package-manager-cache: false
           working-directory: examples/basic
+          browser: ${{ matrix.browser }}
           build: npx cypress info
