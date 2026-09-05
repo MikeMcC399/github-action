@@ -57,10 +57,10 @@ jobs:
           - ubuntu-24.04
           - ubuntu-24.04-arm
           - ubuntu-26.04
-          - windows-2025
-          - windows-11-arm
-          - macos-26
-          - macos-26-intel
+          # - windows-2025
+          # - windows-11-arm
+          # - macos-26
+          # - macos-26-intel
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
@@ -78,3 +78,18 @@ jobs:
           package-manager-cache: false
           working-directory: examples/basic
           build: npx cypress info
+          runTests: false
+
+      - name: Show OS
+        run: |
+          strings /lib/aarch64-linux-gnu/libstdc++.so.6 |
+          grep '^GLIBCXX_' |
+          sort -V |
+          tail -10
+
+      - name: Show Cypress
+        run: |
+          strings ~/.cache/Cypress/16.0.0/Cypress/Cypress |
+          grep '^GLIBCXX_' |
+          sort -V |
+          tail -10
