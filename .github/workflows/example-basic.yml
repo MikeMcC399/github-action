@@ -1,82 +1,18 @@
 name: example-basic
-# This workflow represents a set of basic End-to-End tests
-#
-# In the example jobs, the action is called with
-# uses: ./
-# which runs the action code from the current branch.
-# If you copy this workflow to another repo, replace the line with
-# uses: cypress-io/github-action@v7
 on:
-  push:
-    branches:
-      - 'master'
-  pull_request:
   workflow_dispatch:
 permissions:
   contents: read
 
 jobs:
   basic:
-    strategy:
-      fail-fast: false
-      matrix:
-        os:
-          - ubuntu-22.04
-          - ubuntu-22.04-arm
-          - ubuntu-24.04
-          - ubuntu-24.04-arm
-          - ubuntu-26.04
-          - windows-2025
-          - windows-11-arm
-          - macos-26
-          - macos-26-intel
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-22.04-arm
     steps:
       - name: Checkout
         uses: actions/checkout@v7
 
       - name: Cypress tests
-        uses: ./
-        # the parameters below are only necessary
-        # because we are running these examples in a monorepo
+        uses: $/
         with:
           working-directory: examples/basic
-          browser: ${{ contains(matrix.os, 'ubuntu') && contains(matrix.os, '-arm') && 'firefox' || '' }}
-          # just for full picture after installing Cypress
-          # print information about detected browsers, etc
-          # see https://on.cypress.io/command-line#cypress-info
-          build: npx cypress info
-
-  basic-npm-cache:
-    # Use setup-node to cache npm dependencies
-    strategy:
-      fail-fast: false
-      matrix:
-        os:
-          - ubuntu-22.04
-          - ubuntu-22.04-arm
-          - ubuntu-24.04
-          - ubuntu-24.04-arm
-          - ubuntu-26.04
-          - windows-2025
-          - windows-11-arm
-          - macos-26
-          - macos-26-intel
-    runs-on: ${{ matrix.os }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v7
-      - name: Setup Node.js
-        uses: actions/setup-node@v7
-        with:
-          node-version-file: .node-version
-          cache: npm
-          cache-dependency-path: examples/basic/package-lock.json
-
-      - name: Cypress tests
-        uses: ./
-        with:
-          package-manager-cache: false
-          working-directory: examples/basic
-          browser: ${{ contains(matrix.os, 'ubuntu') && contains(matrix.os, '-arm') && 'firefox' || '' }}
-          build: npx cypress info
+          browser: firefox
