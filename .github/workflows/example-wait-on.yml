@@ -184,3 +184,19 @@ jobs:
           working-directory: examples/wait-on-vite
           start: npx vite --host
           wait-on: 'http://localhost:5173'
+
+  wait-on-vite-https:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Cypress tests
+        uses: ./
+        env:
+          # the dev server uses a self-signed certificate
+          NODE_TLS_REJECT_UNAUTHORIZED: '0'
+        with:
+          working-directory: examples/wait-on-vite
+          config-file: cypress.config-https.js
+          start: npm run dev:https -- --host
+          wait-on: 'https://localhost:5174'
