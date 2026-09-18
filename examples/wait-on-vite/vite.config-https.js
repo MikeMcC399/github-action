@@ -1,11 +1,14 @@
 import { defineConfig } from 'vite'
-import basicSsl from '@vitejs/plugin-basic-ssl'
+import { readFileSync } from 'node:fs'
 
-// alternate config that serves the app over https using a self-signed certificate
+// alternate config that serves the app over https using a committed self-signed certificate
+// (see certs/README.md for how it was generated)
 export default defineConfig({
-  plugins: [basicSsl()],
   server: {
-    https: true,
+    https: {
+      key: readFileSync(new URL('./certs/localhost-key.pem', import.meta.url)),
+      cert: readFileSync(new URL('./certs/localhost-cert.pem', import.meta.url)),
+    },
     port: 5174,
   },
 })

@@ -35,8 +35,9 @@ jobs:
       - name: Cypress tests
         uses: ./
         env:
-          # the dev server uses a self-signed certificate
-          NODE_TLS_REJECT_UNAUTHORIZED: '0'
+          # trust the committed self-signed certificate used by vite.config-https.js
+          # (NODE_TLS_REJECT_UNAUTHORIZED is not honored by got, see sindresorhus/got#1961)
+          NODE_EXTRA_CA_CERTS: ${{ github.workspace }}/examples/wait-on-vite/certs/localhost-cert.pem
         with:
           working-directory: examples/wait-on-vite
           config-file: cypress.config-https.js
