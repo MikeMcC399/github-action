@@ -6,7 +6,7 @@ jobs:
     container: cypress/browsers:latest
     steps:
       - uses: actions/checkout@v7
-      - uses: cypress-io/github-action@v6
+      - uses: cypress-io/github-action@v7
         with:
           browser: firefox
           working-directory: examples/browser
@@ -16,7 +16,7 @@ jobs:
     container: cypress/included:latest
     steps:
       - uses: actions/checkout@v7
-      - uses: cypress-io/github-action@v6
+      - uses: cypress-io/github-action@v7
         with:
           browser: firefox
           working-directory: examples/browser
@@ -28,7 +28,7 @@ jobs:
       options: --user 1001
     steps:
       - uses: actions/checkout@v7
-      - uses: cypress-io/github-action@v6
+      - uses: cypress-io/github-action@v7
         with:
           browser: firefox
           working-directory: examples/browser
@@ -40,7 +40,7 @@ jobs:
       options: --user 1001
     steps:
       - uses: actions/checkout@v7
-      - uses: cypress-io/github-action@v6
+      - uses: cypress-io/github-action@v7
         with:
           browser: firefox
           working-directory: examples/browser
@@ -52,7 +52,7 @@ jobs:
       options: --user node
     steps:
       - uses: actions/checkout@v7
-      - uses: cypress-io/github-action@v6
+      - uses: cypress-io/github-action@v7
         with:
           browser: firefox
           working-directory: examples/browser
