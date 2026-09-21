@@ -58,7 +58,7 @@ jobs:
   #   runs-on: ubuntu-24.04
   #   steps:
   #     - name: Checkout
-  #       uses: actions/checkout@v6
+  #       uses: actions/checkout@v7
   #       with:
   #         ref: v5
   #     - name: Cypress tests
@@ -73,7 +73,7 @@ jobs:
   #   runs-on: ubuntu-24.04
   #   steps:
   #     - name: Checkout
-  #       uses: actions/checkout@v6
+  #       uses: actions/checkout@v7
   #       with:
   #         ref: v5
   #     - name: Cypress tests
@@ -86,7 +86,7 @@ jobs:
   #   runs-on: ubuntu-24.04
   #   steps:
   #     - name: Checkout
-  #       uses: actions/checkout@v6
+  #       uses: actions/checkout@v7
   #       with:
   #         ref: v5
   #     - name: Cypress tests
@@ -99,7 +99,7 @@ jobs:
   #   runs-on: ubuntu-24.04
   #   steps:
   #     - name: Checkout
-  #       uses: actions/checkout@v6
+  #       uses: actions/checkout@v7
   #     - name: Cypress tests
   #       # Supports Cypress v10 and later
   #       uses: cypress-io/github-action@v4.2.1
@@ -111,7 +111,7 @@ jobs:
   #   runs-on: ubuntu-24.04
   #   steps:
   #     - name: Checkout
-  #       uses: actions/checkout@v6
+  #       uses: actions/checkout@v7
   #     - name: Cypress tests
   #       # Supports Cypress v10 and later
   #       uses: cypress-io/github-action@v4.2.2
@@ -123,7 +123,7 @@ jobs:
   #   runs-on: ubuntu-24.04
   #   steps:
   #     - name: Checkout
-  #       uses: actions/checkout@v6
+  #       uses: actions/checkout@v7
   #     - name: Cypress tests
   #       # Supports Cypress v10 and later
   #       uses: cypress-io/github-action@v4
@@ -135,7 +135,7 @@ jobs:
   #   runs-on: ubuntu-24.04
   #   steps:
   #     - name: Checkout
-  #       uses: actions/checkout@v6
+  #       uses: actions/checkout@v7
   #     - name: Cypress tests
   #       uses: cypress-io/github-action@v5
   #       with:
@@ -146,7 +146,7 @@ jobs:
   #   runs-on: ubuntu-24.04
   #   steps:
   #     - name: Checkout
-  #       uses: actions/checkout@v6
+  #       uses: actions/checkout@v7
   #     - name: Cypress tests
   #       uses: cypress-io/github-action@v6.7.8
   #       with:
@@ -157,7 +157,7 @@ jobs:
   #   runs-on: ubuntu-24.04
   #   steps:
   #     - name: Checkout
-  #       uses: actions/checkout@v6
+  #       uses: actions/checkout@v7
   #     - name: Cypress tests
   #       uses: cypress-io/github-action@v6.7.9
   #       with:
@@ -168,7 +168,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Cypress tests
         uses: cypress-io/github-action@v6
         with:
@@ -179,7 +179,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Cypress tests
         uses: cypress-io/github-action@v7
         with:
@@ -190,7 +190,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
       - name: Cypress tests
         uses: cypress-io/github-action@master
         with:
@@ -201,7 +201,7 @@ jobs:
   #   runs-on: ubuntu-24.04
   #   steps:
   #     - name: Checkout
-  #       uses: actions/checkout@v6
+  #       uses: actions/checkout@v7
   #     - name: Cypress tests
   #       # This is illegal syntax
   #       uses: cypress-io/github-action
