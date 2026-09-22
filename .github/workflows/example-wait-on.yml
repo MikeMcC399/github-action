@@ -199,4 +199,4 @@ jobs:
           working-directory: examples/wait-on-vite
           config-file: cypress.config-https.js
           start: npm run dev:https -- --host
-          wait-on: 'https://localhost:5174'
+          wait-on: 'npx wait-on --timeout 60000 https://localhost:5174'
