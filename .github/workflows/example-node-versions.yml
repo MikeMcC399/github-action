@@ -22,6 +22,7 @@ jobs:
           - 24
           - 26.0.0
           - 26
+          - 27-nightly
           - latest
     name: Cypress E2E on Node.js ${{ matrix.node }}
     steps:
