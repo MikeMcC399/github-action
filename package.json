@@ -55,14 +55,14 @@
   "devDependencies": {
     "@eslint/js": "10.0.1",
     "@stylistic/eslint-plugin": "5.10.0",
-    "@types/node": "25.9.4",
+    "@types/node": "25.9.8",
     "@vercel/ncc": "0.45.0",
     "eslint": "10.9.1",
     "eslint-plugin-cypress": "7.0.1",
     "globals": "17.11.0",
     "husky": "9.1.7",
     "markdown-link-check": "3.15.0",
-    "prettier": "3.9.6"
+    "prettier": "3.9.9"
   },
   "publishConfig": {
     "access": "public"
