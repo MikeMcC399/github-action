@@ -6,8 +6,8 @@
   "scripts": {
     "test": "cypress run"
   },
+  "packageManager": "yarn@6.0.0-rc.23",
   "private": true,
-  "packageManager": "6.0.0-rc.19",
   "devDependencies": {
     "cypress": "16.2.0"
   }
