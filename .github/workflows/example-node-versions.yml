@@ -19,10 +19,7 @@ jobs:
           # - 22
           # - 24
           # - 26
-          # - latest
-          - 27
-          - 27.0.0
-          - 27.0.0-alpha
+          - latest
           - 27.0.0-alpha.0.0.0
     name: Cypress E2E on Node.js ${{ matrix.node }}
     steps:
