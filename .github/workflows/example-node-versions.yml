@@ -18,8 +18,10 @@ jobs:
         node:
           - 22.0.0
           - 22
+          - lts/jod
           - 24.0.0
           - 24
+          - lts/krypton
           - 26.0.0
           - 26
           - lts/lithium
