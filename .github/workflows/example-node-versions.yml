@@ -22,8 +22,8 @@ jobs:
           - 24
           - 26.0.0
           - 26
-          - 27-nightly
           - latest
+          - 28-nightly
     name: Cypress E2E on Node.js ${{ matrix.node }}
     steps:
       - name: Checkout
