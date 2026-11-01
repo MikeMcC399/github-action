@@ -22,6 +22,7 @@ jobs:
           - 24
           - 26.0.0
           - 26
+          - lts/lithium
           - lts/*
           - latest
           - 28-nightly
