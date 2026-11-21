@@ -34,25 +34,25 @@ echo updating examples/start-and-yarn-workspaces to cypress@latest
 cd start-and-yarn-workspaces
 for i in 1 2; do
 echo updating workspace-${i}
-yarn workspace workspace-${i} add cypress --dev --exact
+yarn workspace workspace-${i} add cypress --dev --exact --ignore-engines
 done
 echo
 echo updating yarn lockfile for start-and-yarn-workspaces
-yarn install
+yarn install --ignore-engines
 cd ..
 
 # examples/install-command (yarn)
 echo
 echo updating examples/install-command to cypress@latest
 cd install-command
-yarn add cypress --dev --exact
+yarn add cypress --dev --exact --ignore-engines
 cd ..
 
 # examples/yarn-classic
 echo
 echo updating examples/yarn-classic to cypress@latest
 cd yarn-classic
-yarn add cypress --dev --exact
+yarn add cypress --dev --exact --ignore-engines
 cd ..
 
 # --------------------------------------------------
