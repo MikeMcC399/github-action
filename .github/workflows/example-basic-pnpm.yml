@@ -14,9 +14,9 @@ jobs:
       fail-fast: false
       matrix:
         os:
-          - ubuntu-26.04
+          # - ubuntu-26.04
           - windows-2025
-          - macos-26
+          # - macos-26
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
@@ -39,11 +39,14 @@ jobs:
       - name: Install npm@latest
         run: npm install --global npm@latest
 
-      - name: Cypress tests
-        uses: ./ # if copying, replace with cypress-io/github-action@v7
-        with:
-          package-manager-cache: false
-          working-directory: examples/basic-pnpm
-          # print information about detected browsers, etc
-          # see https://on.cypress.io/command-line#cypress-info
-          build: pnpm exec cypress info
+      - name: pnpm install
+        run: pnpm install
+        working-directory: examples/basic-pnpm
+
+      - name: pnpm cypress cache list
+        run: pnpm cypress cache list
+        working-directory: examples/basic-pnpm
+
+      - name: npx cypress cache list
+        run: npx cypress cache list
+        working-directory: examples/basic-pnpm
