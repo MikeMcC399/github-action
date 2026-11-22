@@ -36,6 +36,9 @@ jobs:
           cache: pnpm
           cache-dependency-path: examples/basic-pnpm/pnpm-lock.yaml
 
+      - name: Install npm@latest
+        run: npm install --global npm@latest
+
       - name: Cypress tests
         uses: ./ # if copying, replace with cypress-io/github-action@v7
         with:
