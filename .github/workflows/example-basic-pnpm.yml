@@ -43,6 +43,25 @@ jobs:
         run: pnpm install
         working-directory: examples/basic-pnpm
 
+      - name: Trace Cypress shim
+        working-directory: examples/basic-pnpm
+        shell: pwsh
+        run: |
+          $shim = (Resolve-Path .\node_modules\.bin\cypress.cmd).Path
+          $content = [IO.File]::ReadAllText($shim)
+          if (-not $content.Contains('@SETLOCAL')) {
+            throw 'Cypress shim does not contain @SETLOCAL'
+          }
+          $trace = @'
+          @SETLOCAL
+          @echo SHIM_ARG0=[%0]
+          @echo SHIM_FULL=[%~f0]
+          @echo SHIM_DIR=[%~dp0]
+          @echo WORKING_DIR=[%CD%]
+          @echo NPM_SCRIPT=[%npm_lifecycle_script%]
+          '@
+          [IO.File]::WriteAllText($shim, $content.Replace('@SETLOCAL', $trace))
+
       - name: pnpm cypress cache list
         run: pnpm cypress cache list
         working-directory: examples/basic-pnpm
