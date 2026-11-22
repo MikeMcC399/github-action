@@ -47,6 +47,25 @@ jobs:
         run: pnpm cypress cache list
         working-directory: examples/basic-pnpm
 
+      - name: Inspect versions and shim
+        working-directory: examples/basic-pnpm
+        continue-on-error: true
+        run: |
+          node --version
+          npm --version
+          pnpm --version
+          Get-Content .\node_modules\.bin\cypress.cmd
+
+      - name: Run shim directly
+        working-directory: examples/basic-pnpm
+        continue-on-error: true
+        run: .\node_modules\.bin\cypress.cmd cache list
+
+      - name: Run npx with explicit shell command
+        working-directory: examples/basic-pnpm
+        continue-on-error: true
+        run: npx -c "cypress cache list"
+
       - name: npx cypress cache list
         run: npx cypress cache list
         working-directory: examples/basic-pnpm
